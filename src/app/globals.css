@@ -27,9 +27,14 @@ body {
 }
 
 .text-glow {
-  text-shadow: rgb(237, 237, 237) 0px 0px 16px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
 }
 
 .font-instrument {
   font-family: "Instrument Sans", sans-serif;
+}
+
+/* GitHub Calendar Grid */
+.grid-cols-53 {
+  grid-template-columns: repeat(53, minmax(0, 1fr));
 }

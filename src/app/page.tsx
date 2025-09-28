@@ -1,5 +1,9 @@
 import { instrumentSerif } from "@/app/fonts"
 import Navbar from "@/components/navbar"
+import Lines from "@/components/lines"
+import AboutMe from "@/components/about-me"
+import { SocialIcon } from "react-social-icons"
+import Socials from "@/components/socials"
 
 const Home = () => {
   return (
@@ -13,7 +17,7 @@ const Home = () => {
               position: "relative",
               width: "100vw",
               height: "100vh",
-              backgroundImage: "url('/images/hk_bg_1.png')",
+              backgroundImage: "url('/images/hk_bg.png')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -39,20 +43,30 @@ const Home = () => {
               <h2 className={`${instrumentSerif.className} text-xl text-white`}>
                 Trying to understand how things work
               </h2>
+              <div className="flex items-center justify-center space-x-4">
+                {" "}
+                {/* CTA Button */}
+                <button
+                  className="ml-2 flex cursor-pointer items-center rounded-md bg-white px-2 py-1 font-medium text-black transition-colors duration-200"
+                  // Gradient Style
+                  // style={{
+                  //   background:
+                  //     "linear-gradient(to right, #061113, #0D1B21, #0E2128, #16282F, #1E383C)",
+                  // }}
+                >
+                  <span>Resume</span>
+                </button>{" "}
+                <Socials />
+              </div>
             </div>
           </div>
         </main>
       </div>
+      <Lines />
 
-      <div className="mb-0.25 h-2 w-full bg-[#061113]" />
-      <div className="mb-0.25 h-2 w-full bg-[#0D1B21]" />
-      <div className="mb-0.25 h-2 w-full bg-[#0E2128]" />
-      <div className="mb-0.25 h-2 w-full bg-[#16282F]" />
-      <div className="mb-0.25 h-2 w-full bg-[#1E383C]" />
-      <div className="mb-0.25 h-2 w-full bg-[#1E383C]" />
-      <div className="mb-0.25 bg-black">
+      <div id="about" className="mb-0.25 bg-black">
         <div className="bg-gradient-background h-full w-full">
-          <h1 className="text-glow text-8xl text-white">More about me:</h1>
+          <AboutMe />
         </div>
         <br />
         <h2 className="text-xl text-white">hey</h2>
