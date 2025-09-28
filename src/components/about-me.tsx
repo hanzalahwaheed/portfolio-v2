@@ -1,6 +1,7 @@
 import Image from "next/image"
-import BackgroundImage from "./background-image"
 import GitHubCalendar from "./github-calendar"
+import { FlowingCarousel } from "./flowing-carousel"
+import { TechStack } from "./tech-stack"
 
 const AboutMe = () => {
   return (
@@ -10,14 +11,14 @@ const AboutMe = () => {
 
       {/* Content with relative z-index to appear above background */}
       <div className="relative z-10">
-        <h1 className="text-glow mb-16 text-center text-4xl text-white font-bold">my story so far, tldr;</h1>
+        <h1 className="text-glow mb-16 text-center text-4xl font-bold text-white">my story so far, tldr;</h1>
 
         {/* basic intro */}
-        <div className="mb-16 flex h-full flex-col items-center justify-center gap-8 lg:flex-row">
+        <div className="mx-auto mb-16 flex h-full w-full max-w-3xl flex-col items-center justify-center gap-8 lg:flex-row">
           <div className="flex-shrink-0">
             <Image src="/images/pfp.jpeg" alt="Hanzalah Waheed" width={250} height={250} className="rounded-3xl" />
           </div>
-          <div className="flex h-full max-w-lg flex-1 flex-col justify-center text-center lg:text-left">
+          <div className="flex h-full flex-1 flex-col justify-center text-center lg:text-left">
             <p className="flex-1 text-2xl leading-relaxed font-medium text-gray-300">
               I&apos;m a software engineer with a passion for building products that help people live better lives.
               I&apos;m currently working at{" "}
@@ -47,7 +48,7 @@ const AboutMe = () => {
           </div>
         </div>
         {/* work */}
-        <div className="mt-16 w-full max-w-4xl">
+        <div className="mx-auto mt-16 w-full max-w-3xl">
           <h2 className="text-glow mb-8 text-center text-4xl text-white">my work</h2>
           <div className="grid gap-8">
             <div className="rounded-2xl bg-white/5 p-6 backdrop-blur-sm">
@@ -68,7 +69,7 @@ const AboutMe = () => {
             <GitHubCalendar username="hanzalahwaheed" />
           </div>
         </div>
-        <div className="mt-16 w-full max-w-4xl">
+        <div className="mx-auto mt-16 w-full max-w-3xl">
           <h2 className="text-glow mb-8 text-center text-4xl text-white">my side projects</h2>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-lg border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
@@ -88,9 +89,9 @@ const AboutMe = () => {
         </div>
 
         {/* tech stack */}
-        <div className="mt-16 w-full max-w-4xl">
+        <div className="mx-auto mt-16 w-full max-w-3xl">
           <h2 className="text-glow mb-8 text-center text-4xl text-white">Tech Stack</h2>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          {/* <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
             <div className="flex flex-col items-center rounded-lg border border-white/20 bg-white/5 p-4 backdrop-blur-sm transition-all hover:bg-white/10">
               <div className="mb-2 text-3xl">⚛️</div>
               <span className="text-sm text-white">React</span>
@@ -115,7 +116,9 @@ const AboutMe = () => {
               <div className="mb-2 text-3xl">🗄️</div>
               <span className="text-sm text-white">PostgreSQL</span>
             </div>
-          </div>
+          </div> */}
+          {/* <FlowingCarousel /> */}
+          <TechStack />
         </div>
       </div>
     </div>

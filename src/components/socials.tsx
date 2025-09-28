@@ -1,10 +1,11 @@
+import Link from "next/link"
 import React from "react"
 import { SocialIcon } from "react-social-icons"
 
 const socials = () => {
   return (
     <div className="flex space-x-3">
-      <SocialIcon
+      {/* <SocialIcon
         url="https://github.com/hanzalahwaheed"
         style={{ height: 32, width: 32 }}
         bgColor="transparent"
@@ -21,7 +22,10 @@ const socials = () => {
         style={{ height: 32, width: 32 }}
         bgColor="transparent"
         fgColor="white"
-      />
+      /> */}
+      <Link href="https://github.com/hanzalahwaheed">Github</Link>
+      <Link href="https://linkedin.com/in/hanzalahwaheed">Linkedin</Link>
+      <Link href="https://twitter.com/hanzalahwaheed">Twitter</Link>
     </div>
   )
 }
