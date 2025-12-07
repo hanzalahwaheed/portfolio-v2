@@ -1,12 +1,17 @@
-const Lines = () => {
+type LinesProps = {
+  reverse?: boolean
+}
+
+const Lines = ({ reverse = false }: LinesProps) => {
+  const colors = ["#061113", "#0D1B21", "#0E2128", "#16282F", "#1E383C", "#1E383C"]
+
+  const list = reverse ? [...colors].reverse() : colors
+
   return (
     <>
-      <div className="mb-0.25 h-2 w-full bg-[#061113]" />
-      <div className="mb-0.25 h-2 w-full bg-[#0D1B21]" />
-      <div className="mb-0.25 h-2 w-full bg-[#0E2128]" />
-      <div className="mb-0.25 h-2 w-full bg-[#16282F]" />
-      <div className="mb-0.25 h-2 w-full bg-[#1E383C]" />
-      <div className="mb-0.25 h-2 w-full bg-[#1E383C]" />
+      {list.map((color, idx) => (
+        <div key={idx} className="mb-0.25 h-2 w-full" style={{ backgroundColor: color }} />
+      ))}
     </>
   )
 }

@@ -10,10 +10,6 @@ interface GitHubCalendarProps {
 const GitHubCalendarComponent = ({ username, className = "" }: GitHubCalendarProps) => {
   return (
     <div className={`${className}`}>
-      <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h3 className="mb-2 text-2xl font-bold text-white sm:mb-0">github stats</h3>
-      </div>
-
       <div className="github-calendar-wrapper">
         <GitHubCalendar
           username={username}

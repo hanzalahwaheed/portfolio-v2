@@ -38,7 +38,7 @@ const Home = () => {
           </div>
         </main>
       </div>
-      <Lines />
+      <Lines reverse={true} />
 
       <div id="about-me" className="mb-0.25">
         <div className="bg-gradient-background h-full w-full">

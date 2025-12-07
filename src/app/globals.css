@@ -31,25 +31,28 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-body::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
 html {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scrolling */
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
 }
 
 html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scrolling */
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
 
@@ -92,20 +95,4 @@ html::-webkit-scrollbar {
 
 .animate-scroll-right {
   animation: scroll-right 40s linear infinite;
-}
-
-/* Cursor indicator for scrollable area */
-body.scrollable-bottom {
-  cursor: s-resize; /* Down arrow cursor */
-}
-
-/* Don't override cursor on interactive elements */
-body.scrollable-bottom a,
-body.scrollable-bottom button,
-body.scrollable-bottom input,
-body.scrollable-bottom textarea,
-body.scrollable-bottom select,
-body.scrollable-bottom [role="button"],
-body.scrollable-bottom [onclick] {
-  cursor: pointer;
 }

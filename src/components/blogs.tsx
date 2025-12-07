@@ -1,18 +1,178 @@
-import { Instrument_Serif } from "next/font/google"
+"use client"
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  subsets: ["latin"],
-})
+import React, { useState } from "react"
+import Image from "next/image"
+import { ArrowUpRight, Calendar, Clock, ChevronRight } from "lucide-react"
+
+type ArticleSize = "large" | "tall" | "wide" | "standard"
+
+type Article = {
+  id: number
+  title: string
+  excerpt: string
+  date: string
+  readTime: string
+  category: string
+  image: string
+  size: ArticleSize
+}
+
+const articles: Article[] = [
+  {
+    id: 1,
+    title: "The Art of Silence in Design",
+    excerpt: "Why emptiness is the most powerful element on your canvas.",
+    date: "Dec 08, 2025",
+    readTime: "5 min",
+    category: "Design",
+    image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop",
+    size: "large", // spans 2 cols, 2 rows
+  },
+  {
+    id: 2,
+    title: "Neon Nights",
+    excerpt: "capturing the soul of the city after dark.",
+    date: "Dec 05, 2025",
+    readTime: "3 min",
+    category: "Photography",
+    image: "https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=1974&auto=format&fit=crop",
+    size: "tall", // spans 1 col, 2 rows
+  },
+  {
+    id: 3,
+    title: "Minimalism is Dead?",
+    excerpt: "Exploring the rise of maximalist interfaces.",
+    date: "Nov 28, 2025",
+    readTime: "6 min",
+    category: "Opinion",
+    image: "https://images.unsplash.com/photo-1507643179173-617d6a6567a6?q=80&w=2000&auto=format&fit=crop",
+    size: "standard", // 1x1
+  },
+  {
+    id: 4,
+    title: "Future Typography",
+    excerpt: "Variable fonts and the web.",
+    date: "Nov 22, 2025",
+    readTime: "4 min",
+    category: "Tech",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop",
+    size: "wide", // spans 2 cols, 1 row
+  },
+  {
+    id: 5,
+    title: "Analog Sounds",
+    excerpt: "Why vinyl is making a comeback.",
+    date: "Nov 15, 2025",
+    readTime: "7 min",
+    category: "Culture",
+    image: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=2074&auto=format&fit=crop",
+    size: "standard", // 1x1
+  },
+]
+
+const BlogCard = ({ article }: { article: Article }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  // Determine grid spans based on the 'size' property
+  const getGridClasses = (size: ArticleSize): string => {
+    switch (size) {
+      case "large":
+        return "md:col-span-2 md:row-span-2"
+      case "tall":
+        return "md:col-span-1 md:row-span-2"
+      case "wide":
+        return "md:col-span-2 md:row-span-1"
+      default:
+        return "md:col-span-1 md:row-span-1"
+    }
+  }
+
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 ${getGridClasses(article.size)} transition-all duration-500 hover:border-neutral-600`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={article.image}
+          alt={article.title}
+          fill
+          className="object-cover opacity-60 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col justify-end p-6">
+        {/* Top Tag */}
+        <div className="absolute top-6 left-6">
+          <span className="inline-block rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+            {article.category}
+          </span>
+        </div>
+
+        {/* Arrow Icon */}
+        <div
+          className={`absolute top-6 right-6 transition-all duration-300 ${isHovered ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"}`}
+        >
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
+            <ArrowUpRight size={20} />
+          </div>
+        </div>
+
+        {/* Text Content */}
+        <div className={`transform transition-all duration-500 ${isHovered ? "translate-y-0" : "translate-y-2"}`}>
+          <div className="mb-3 flex items-center gap-4 text-xs text-neutral-400">
+            <span className="flex items-center gap-1">
+              <Calendar size={12} /> {article.date}
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock size={12} /> {article.readTime}
+            </span>
+          </div>
+
+          <h3 className="mb-2 font-serif text-2xl leading-tight font-medium text-white group-hover:text-neutral-200">
+            {article.title}
+          </h3>
+
+          <p
+            className={`line-clamp-2 text-sm text-neutral-400 transition-all duration-500 ${isHovered ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}
+          >
+            {article.excerpt}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const Blogs = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-black px-4 py-16">
-      <h2 className={`${instrumentSerif.className} text-glow mb-16 text-center text-6xl text-white`}>
-        Blogs
-      </h2>
-      <div className="text-center text-gray-400">
-        <p className="text-xl">Coming Soon...</p>
+    <div className="min-h-screen bg-[#050505] p-8 font-sans text-white selection:bg-white selection:text-black md:p-16">
+      {/* Section Header */}
+      <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <h2 className="bg-gradient-to-b from-white to-white/60 bg-clip-text font-serif text-5xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-7xl">
+            Blogs
+          </h2>
+          <p className="mt-4 max-w-md text-neutral-500">
+            Thoughts, stories, and ideas on design, technology, and culture.
+          </p>
+        </div>
+
+        <button className="group flex items-center gap-2 border-b border-transparent pb-1 text-sm font-medium text-white transition-colors hover:border-white hover:text-neutral-300">
+          View all articles
+          <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </button>
+      </header>
+
+      {/* The Weird Grid */}
+      <div className="grid auto-rows-[300px] grid-cols-1 gap-4 md:grid-cols-4">
+        {articles.map(article => (
+          <BlogCard key={article.id} article={article} />
+        ))}
       </div>
     </div>
   )
