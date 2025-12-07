@@ -29,7 +29,7 @@ const techCategories = {
   backend: {
     name: "Backend & APIs",
     color: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    items: ["Node.js", "Express", "tRPC", "Prisma", "GraphQL"],
+    items: ["Node.js", "Express", "tRPC", "Drizzle ORM", "GraphQL"],
   },
   databases: {
     name: "Databases",

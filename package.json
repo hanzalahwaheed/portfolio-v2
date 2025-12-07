@@ -6,11 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:introspect": "drizzle-kit introspect",
+    "db:verify": "tsx scripts/verify-table.ts"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.1.0",
-    "@prisma/client": "^7.1.0",
+    "@neondatabase/serverless": "^0.10.0",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
@@ -48,7 +53,7 @@
     "eslint-config-next": "15.5.2",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "prisma": "^7.1.0",
+    "drizzle-kit": "^0.30.0",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"

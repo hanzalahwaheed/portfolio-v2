@@ -1,22 +1,27 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
+import { db, posts } from '@/db';
 import { verifyAdmin } from '@/lib/admin-auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { uuidv7 } from 'uuidv7';
+import { eq, desc } from 'drizzle-orm';
 
 export async function getPosts() {
-  return await prisma.post.findMany({
-    where: { published: true },
-    orderBy: { createdAt: 'desc' },
-  });
+  return await db
+    .select()
+    .from(posts)
+    .where(eq(posts.published, true))
+    .orderBy(desc(posts.createdAt));
 }
 
 export async function getPost(slug: string) {
-  return await prisma.post.findUnique({
-    where: { slug },
-  });
+  const result = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.slug, slug))
+    .limit(1);
+  return result[0] || null;
 }
 
 export async function getAllPostsAdmin() {
@@ -24,9 +29,7 @@ export async function getAllPostsAdmin() {
   if (!isAdmin) {
     throw new Error('Unauthorized');
   }
-  return await prisma.post.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
+  return await db.select().from(posts).orderBy(desc(posts.createdAt));
 }
 
 export async function createPost(formData: FormData) {
@@ -42,18 +45,16 @@ export async function createPost(formData: FormData) {
   const coverImage = formData.get('coverImage') as string;
   const published = formData.get('published') === 'on';
 
-  await prisma.post.create({
-    data: {
-      id: uuidv7(),
-      title,
-      slug,
-      content,
-      excerpt,
-      coverImage,
-      published,
-      publishedAt: published ? new Date() : null,
-      updatedAt: new Date(),
-    },
+  await db.insert(posts).values({
+    id: uuidv7(),
+    title,
+    slug,
+    content,
+    excerpt: excerpt || null,
+    coverImage: coverImage || null,
+    published,
+    publishedAt: published ? new Date() : null,
+    updatedAt: new Date(),
   });
 
   revalidatePath('/blog');
@@ -74,18 +75,19 @@ export async function updatePost(id: string, formData: FormData) {
   const coverImage = formData.get('coverImage') as string;
   const published = formData.get('published') === 'on';
 
-  await prisma.post.update({
-    where: { id },
-    data: {
+  await db
+    .update(posts)
+    .set({
       title,
       slug,
       content,
-      excerpt,
-      coverImage,
+      excerpt: excerpt || null,
+      coverImage: coverImage || null,
       published,
       publishedAt: published ? new Date() : null,
-    },
-  });
+      updatedAt: new Date(),
+    })
+    .where(eq(posts.id, id));
 
   revalidatePath('/blog');
   revalidatePath('/admin');
@@ -99,9 +101,7 @@ export async function deletePost(id: string) {
     throw new Error('Unauthorized');
   }
 
-  await prisma.post.delete({
-    where: { id },
-  });
+  await db.delete(posts).where(eq(posts.id, id));
 
   revalidatePath('/blog');
   revalidatePath('/admin');

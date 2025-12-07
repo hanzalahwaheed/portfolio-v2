@@ -1,7 +1,8 @@
-import { updatePost, getPost } from '@/app/actions/blog';
+import { updatePost } from '@/app/actions/blog';
 import { Editor } from '@/components/blog/editor';
-import { redirect, notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
+import { notFound } from 'next/navigation';
+import { db, posts } from '@/db';
+import { eq } from 'drizzle-orm';
 
 interface EditPostPageProps {
   params: Promise<{
@@ -10,11 +11,14 @@ interface EditPostPageProps {
 }
 
 export default async function EditPostPage({ params }: EditPostPageProps) {
-
   const { id } = await params;
-  const post = await prisma.post.findUnique({
-    where: { id },
-  });
+  const result = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.id, id))
+    .limit(1);
+  
+  const post = result[0] || null;
 
   if (!post) {
     notFound();
