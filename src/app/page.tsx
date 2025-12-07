@@ -5,6 +5,7 @@ import AboutMe from "@/components/about-me"
 import Socials from "@/components/socials"
 import Blogs from "@/components/blogs"
 import Bookery from "@/components/bookery"
+import MoreBelow from "@/components/more-below"
 import Link from "next/link"
 
 const Home = () => {
@@ -31,6 +32,7 @@ const Home = () => {
                 <Socials />
               </div>
             </div>
+            <MoreBelow />
           </div>
         </main>
       </div>
