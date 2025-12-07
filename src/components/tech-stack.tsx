@@ -73,45 +73,9 @@ export function TechStack({ className }: TechStackProps) {
     </div>
   )
 
-  // const createFlowingBanner = () => {
-  //   const allItems = Object.entries(techCategories).flatMap(([key, category]) =>
-  //     category.items.slice(0, 2).map(item => ({ name: item, color: category.color })),
-  //   )
-
-  //   return allItems
-  // }
-
-  // const bannerItems = createFlowingBanner()
-
   return (
     <div className={cn("tech-grid-bg relative w-full overflow-hidden py-12", className)}>
-      {/* <div className="mb-12 px-4 text-center">
-        <h2 className="text-foreground mb-4 text-3xl font-bold text-balance">Tech Stack Showcase</h2>
-        <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-pretty">
-          Explore the technologies powering modern web development, organized by category
-        </p>
-      </div> */}
 
-      {/* <div className="group relative mb-12 overflow-hidden">
-        <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r to-transparent" />
-        <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l to-transparent" />
-
-        <div className="animate-scroll-left group-hover:pause flex gap-4 py-2 whitespace-nowrap">
-          {Array.from({ length: 4 }).map((_, setIndex) =>
-            bannerItems.map((item, index) => (
-              <div
-                key={`banner-${setIndex}-${index}`}
-                className={cn(
-                  "inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium opacity-60",
-                  item.color,
-                )}
-              >
-                {item.name}
-              </div>
-            )),
-          )}
-        </div>
-      </div> */}
 
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -123,24 +87,7 @@ export function TechStack({ className }: TechStackProps) {
         </div>
       </div>
 
-      {/* <div className="mt-16 px-4 text-center">
-        <div className="mx-auto max-w-4xl">
-          <h3 className="text-foreground mb-4 text-lg font-medium">Complete Technology Stack</h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            {Object.entries(techCategories).map(([key, category]) => (
-              <div
-                key={key}
-                className={cn(
-                  "flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium",
-                  category.color,
-                )}
-              >
-                {category.name} ({category.items.length})
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
+
     </div>
   )
 }

@@ -32,7 +32,7 @@ const technologies = [
   "tRPC",
 ]
 
-export function FlowingCarousel({ className }: FlowingCarouselProps) {
+export function FlowingCarouselTechStack({ className }: FlowingCarouselProps) {
   const topTechnologies = technologies.slice(0, 8)
   const bottomTechnologies = technologies.slice(8)
 

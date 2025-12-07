@@ -3,6 +3,8 @@ import Navbar from "@/components/navbar"
 import Lines from "@/components/lines"
 import AboutMe from "@/components/about-me"
 import Socials from "@/components/socials"
+import Blogs from "@/components/blogs"
+import Bookery from "@/components/bookery"
 import Link from "next/link"
 
 const Home = () => {
@@ -14,7 +16,7 @@ const Home = () => {
           <div
             className="relative h-screen w-screen bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('/images/hk_bg.png')",
+              backgroundImage: "url('/images/hollow_knight_bg.jpg')",
             }}
           >
             <div className="absolute top-[45%] left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-transparent">
@@ -34,12 +36,23 @@ const Home = () => {
       </div>
       <Lines />
 
-      <div id="about" className="mb-0.25 bg-black">
+      <div id="about-me" className="mb-0.25 bg-black">
         <div className="bg-gradient-background h-full w-full">
           <AboutMe />
         </div>
       </div>
       <Lines />
+
+      <div id="blogs">
+        <Blogs />
+      </div>
+      <Lines />
+
+      <div id="bookery">
+        <Bookery />
+      </div>
+      <Lines />
+
       <footer className="flex h-48 flex-col items-center justify-center gap-4 bg-[#061113]">
         <p>Design and Development by Hanzalah Waheed</p>
         <p>&copy; {new Date().getFullYear()}</p>
