@@ -17,6 +17,8 @@ const Home = () => {
           <div
             className="relative h-screen w-screen bg-cover bg-center bg-no-repeat"
             style={{
+              // backgroundImage: "url('/images/image copy 3.png')",
+              // backgroundImage: "url('/images/temp.avif')",
               backgroundImage: "url('/images/hollow_knight_bg.jpg')",
             }}
           >
@@ -38,7 +40,7 @@ const Home = () => {
       </div>
       <Lines />
 
-      <div id="about-me" className="mb-0.25 bg-black">
+      <div id="about-me" className="mb-0.25">
         <div className="bg-gradient-background h-full w-full">
           <AboutMe />
         </div>

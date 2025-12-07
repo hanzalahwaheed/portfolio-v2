@@ -6,7 +6,6 @@ import { TechStack } from "./tech-stack"
 const AboutMe = () => {
   return (
     <div className="relative flex flex-col items-center justify-center px-4 py-16">
-
       {/* Content with relative z-index to appear above background */}
       <div className="relative z-10">
         <h1 className="text-glow mb-16 text-center text-4xl font-bold text-white">my story so far, tldr;</h1>
@@ -17,9 +16,8 @@ const AboutMe = () => {
             <Image src="/images/pfp.jpeg" alt="Hanzalah Waheed" width={250} height={250} className="rounded-3xl" />
           </div>
           <div className="flex h-full flex-1 flex-col justify-center text-center lg:text-left">
-
             <p className="flex-1 text-2xl leading-relaxed font-medium text-gray-300">
-              I&apos;m a software engineer with a passion for building products that help people live better lives.
+              I&apos;m a software engineer with a deep interest in building products that help people live better lives.
               I&apos;m currently working at{" "}
               <a
                 href="https://www.stockinsights.ai"
