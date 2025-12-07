@@ -17,19 +17,7 @@ const AboutMe = () => {
             <Image src="/images/pfp.jpeg" alt="Hanzalah Waheed" width={250} height={250} className="rounded-3xl" />
           </div>
           <div className="flex h-full flex-1 flex-col justify-center text-center lg:text-left">
-            <p className="flex-1 text-2xl leading-relaxed font-medium text-gray-300">
-              I&apos;m a software engineer with a passion for building products that help people live better lives.
-              I&apos;m currently working at{" "}
-              <a
-                href="https://www.stockinsights.ai"
-                className="text-blue-400 transition-colors hover:text-blue-300"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                StockInsights AI
-              </a>
-              , where I build financial intelligence tools that empower investors to make better decisions.
-            </p>
+
             <p className="flex-1 text-2xl leading-relaxed font-medium text-gray-300">
               I&apos;m a software engineer with a passion for building products that help people live better lives.
               I&apos;m currently working at{" "}

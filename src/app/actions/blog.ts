@@ -1,9 +1,10 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { auth } from '@/auth';
+import { verifyAdmin } from '@/lib/admin-auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { uuidv7 } from 'uuidv7';
 
 export async function getPosts() {
   return await prisma.post.findMany({
@@ -19,8 +20,8 @@ export async function getPost(slug: string) {
 }
 
 export async function getAllPostsAdmin() {
-  const session = await auth();
-  if (!session) {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
     throw new Error('Unauthorized');
   }
   return await prisma.post.findMany({
@@ -29,8 +30,8 @@ export async function getAllPostsAdmin() {
 }
 
 export async function createPost(formData: FormData) {
-  const session = await auth();
-  if (!session) {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
     throw new Error('Unauthorized');
   }
 
@@ -43,6 +44,7 @@ export async function createPost(formData: FormData) {
 
   await prisma.post.create({
     data: {
+      id: uuidv7(),
       title,
       slug,
       content,
@@ -50,6 +52,7 @@ export async function createPost(formData: FormData) {
       coverImage,
       published,
       publishedAt: published ? new Date() : null,
+      updatedAt: new Date(),
     },
   });
 
@@ -59,8 +62,8 @@ export async function createPost(formData: FormData) {
 }
 
 export async function updatePost(id: string, formData: FormData) {
-  const session = await auth();
-  if (!session) {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
     throw new Error('Unauthorized');
   }
 
@@ -91,8 +94,8 @@ export async function updatePost(id: string, formData: FormData) {
 }
 
 export async function deletePost(id: string) {
-  const session = await auth();
-  if (!session) {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
     throw new Error('Unauthorized');
   }
 

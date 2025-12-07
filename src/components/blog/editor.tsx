@@ -36,14 +36,14 @@ export function Editor({ post, action }: EditorProps) {
     <div className="container max-w-5xl py-12">
       <Link
         href="/admin"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        className="mb-8 inline-flex items-center gap-2 text-sm text-olive-grey hover:text-deep-teal dark:hover:text-gold-dust transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to dashboard
       </Link>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight text-deep-teal dark:text-cream font-instrument">
             {post ? 'Edit Post' : 'New Post'}
           </h1>
           <div className="flex items-center gap-4">
@@ -52,10 +52,11 @@ export function Editor({ post, action }: EditorProps) {
                 id="published"
                 name="published"
                 defaultChecked={post?.published}
+                className="data-[state=checked]:bg-deep-teal"
               />
-              <Label htmlFor="published">Published</Label>
+              <Label htmlFor="published" className="text-rich-black dark:text-cream">Published</Label>
             </div>
-            <Button type="submit" disabled={isPending}>
+            <Button type="submit" disabled={isPending} className="bg-deep-teal hover:bg-deep-teal/90 text-cream">
               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Save
             </Button>
@@ -63,63 +64,66 @@ export function Editor({ post, action }: EditorProps) {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="title">Title</Label>
+              <Label htmlFor="title" className="text-rich-black dark:text-cream font-medium">Title</Label>
               <Input
                 id="title"
                 name="title"
                 defaultValue={post?.title}
                 required
                 placeholder="Post title"
+                className="border-gold-dust/30 focus-visible:ring-deep-teal bg-cream/50 dark:bg-rich-black/50"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="slug">Slug</Label>
+              <Label htmlFor="slug" className="text-rich-black dark:text-cream font-medium">Slug</Label>
               <Input
                 id="slug"
                 name="slug"
                 defaultValue={post?.slug}
                 required
                 placeholder="post-slug"
+                className="border-gold-dust/30 focus-visible:ring-deep-teal bg-cream/50 dark:bg-rich-black/50"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="excerpt">Excerpt</Label>
+              <Label htmlFor="excerpt" className="text-rich-black dark:text-cream font-medium">Excerpt</Label>
               <TextareaAutosize
                 id="excerpt"
                 name="excerpt"
                 defaultValue={post?.excerpt || ''}
-                className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full rounded-md border border-gold-dust/30 bg-cream/50 dark:bg-rich-black/50 px-3 py-2 text-sm ring-offset-background placeholder:text-olive-grey/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-teal focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 minRows={3}
                 placeholder="Brief description for the card..."
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="coverImage">Cover Image URL</Label>
+              <Label htmlFor="coverImage" className="text-rich-black dark:text-cream font-medium">Cover Image URL</Label>
               <Input
                 id="coverImage"
                 name="coverImage"
                 defaultValue={post?.coverImage || ''}
                 placeholder="https://example.com/image.jpg"
+                className="border-gold-dust/30 focus-visible:ring-deep-teal bg-cream/50 dark:bg-rich-black/50"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="content">Content (Markdown)</Label>
+              <Label htmlFor="content" className="text-rich-black dark:text-cream font-medium">Content (Markdown)</Label>
               <TextareaAutosize
                 id="content"
                 name="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="flex min-h-[400px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex min-h-[400px] w-full rounded-md border border-gold-dust/30 bg-cream/50 dark:bg-rich-black/50 px-3 py-2 text-sm font-mono ring-offset-background placeholder:text-olive-grey/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-teal focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="# Hello World"
                 required
               />
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <Label>Preview</Label>
-            <div className="min-h-[500px] rounded-md border border-border bg-card p-6 prose prose-neutral dark:prose-invert max-w-none overflow-y-auto">
+            <Label className="text-rich-black dark:text-cream font-medium">Preview</Label>
+            <div className="min-h-[500px] rounded-md border border-gold-dust/30 bg-cream/30 dark:bg-rich-black/30 p-6 prose prose-neutral dark:prose-invert max-w-none overflow-y-auto prose-headings:text-deep-teal dark:prose-headings:text-gold-dust prose-a:text-deep-teal dark:prose-a:text-turquoise">
               <ReactMarkdown>{content}</ReactMarkdown>
             </div>
           </div>
