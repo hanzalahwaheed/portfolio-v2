@@ -50,8 +50,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 z-50 min-w-xl -translate-x-1/2 transform text-lg transition-all duration-300 ease-in-out ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
+      className={`fixed top-4 left-1/2 z-50 min-w-xl -translate-x-1/2 transform text-lg transition-all duration-300 ease-in-out ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      }`}
     >
       <div className="min-h-8 rounded-xl bg-white/10 shadow-lg backdrop-blur-md">
         <div className="flex items-center justify-center space-x-4 px-4 py-2">
@@ -71,7 +72,7 @@ const Navbar = () => {
               smooth={true}
               duration={500}
               offset={-80}
-              className="cursor-pointer hover:text-glow font-medium text-white transition-colors duration-200"
+              className="hover:text-glow cursor-pointer font-medium text-white transition-colors duration-200"
             >
               Builds
             </Link>
@@ -93,10 +94,7 @@ const Navbar = () => {
             >
               Bookery
             </Link>
-            <a
-              href="/resume.pdf"
-              className="font-medium text-white transition-colors duration-200 hover:text-blue-200"
-            >
+            <a href="/resume.pdf" className="font-medium text-white transition-colors duration-200 hover:text-blue-200">
               {/* Add some special animation here */}
               Let&apos;s Talk
             </a>

@@ -75,8 +75,6 @@ export function TechStack({ className }: TechStackProps) {
 
   return (
     <div className={cn("tech-grid-bg relative w-full overflow-hidden py-12", className)}>
-
-
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {Object.entries(techCategories).map(([key, category]) => (
@@ -86,8 +84,6 @@ export function TechStack({ className }: TechStackProps) {
           ))}
         </div>
       </div>
-
-
     </div>
   )
 }

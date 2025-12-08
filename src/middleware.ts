@@ -1,18 +1,18 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
 // Middleware for Admin Auth
 export function middleware(request: NextRequest) {
   // Only protect /admin routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    const key = request.nextUrl.searchParams.get('key')
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    const key = request.nextUrl.searchParams.get("key")
     const adminKey = process.env.ADMIN_KEY
-    const cookieKey = request.cookies.get('admin-key')?.value
+    const cookieKey = request.cookies.get("admin-key")?.value
 
     // 1. Check if we have the correct key in query params
     if (key && key === adminKey) {
       const requestHeaders = new Headers(request.headers)
-      requestHeaders.set('x-admin-auth', 'true')
+      requestHeaders.set("x-admin-auth", "true")
 
       const response = NextResponse.next({
         request: {
@@ -20,11 +20,11 @@ export function middleware(request: NextRequest) {
         },
       })
       // Set the cookie for future requests
-      response.cookies.set('admin-key', key, {
+      response.cookies.set("admin-key", key, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
       })
       return response
     }
@@ -37,10 +37,10 @@ export function middleware(request: NextRequest) {
     // 3. Otherwise redirect to home or show 403 (redirecting to home for now to hide admin existence)
     // Or actually, user asked to "block the route". I'll return a 404 or just redirect to home.
     // Redirecting to home is safer/cleaner.
-    return NextResponse.redirect(new URL('/', request.url))
+    return NextResponse.redirect(new URL("/", request.url))
   }
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ["/admin/:path*"],
 }
