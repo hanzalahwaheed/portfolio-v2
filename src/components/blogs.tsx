@@ -93,11 +93,11 @@ const BlogCard = ({ article }: { article: Article }) => {
         {/* Content */}
         <div className="relative z-10 flex h-full flex-col justify-end p-6">
           {/* Top Tag */}
-          <div className="absolute top-6 left-6">
+          {/* <div className="absolute top-6 left-6">
             <span className="inline-block rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
               {article.category}
             </span>
-          </div>
+          </div> */}
 
           {/* Arrow Icon */}
           <div
@@ -162,11 +162,11 @@ const Blogs = () => {
       {/* Section Header */}
       <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <h2 className="bg-gradient-to-b from-white to-white/60 bg-clip-text font-serif text-5xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-7xl">
+          <h2 className="bg-gradient-to-b pb-2 from-white to-white/60 bg-clip-text font-serif text-4xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-5xl">
             Blogs
           </h2>
-          <p className="mt-4 max-w-md text-neutral-500">
-            Thoughts, stories, and ideas on design, technology, and culture.
+          <p className="mt-4 max-w-md text-white">
+            I write about tech and design.
           </p>
         </div>
 
