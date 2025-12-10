@@ -1,74 +1,59 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowUpRight, Calendar, Clock, ChevronRight } from "lucide-react"
+import { getPosts } from "@/app/actions/blog"
+import { Post } from "@/db"
+import { format } from "date-fns"
 
 type ArticleSize = "large" | "tall" | "wide" | "standard"
 
 type Article = {
-  id: number
+  id: string
   title: string
-  excerpt: string
+  excerpt: string | null
   date: string
   readTime: string
   category: string
   image: string
   size: ArticleSize
+  slug: string
 }
 
-const articles: Article[] = [
-  {
-    id: 1,
-    title: "The Art of Silence in Design",
-    excerpt: "Why emptiness is the most powerful element on your canvas.",
-    date: "Dec 08, 2025",
-    readTime: "5 min",
-    category: "Design",
-    image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop",
-    size: "large", // spans 2 cols, 2 rows
-  },
-  {
-    id: 2,
-    title: "Neon Nights",
-    excerpt: "capturing the soul of the city after dark.",
-    date: "Dec 05, 2025",
-    readTime: "3 min",
-    category: "Photography",
-    image: "https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=1974&auto=format&fit=crop",
-    size: "tall", // spans 1 col, 2 rows
-  },
-  {
-    id: 3,
-    title: "Minimalism is Dead?",
-    excerpt: "Exploring the rise of maximalist interfaces.",
-    date: "Nov 28, 2025",
-    readTime: "6 min",
-    category: "Opinion",
-    image: "https://images.unsplash.com/photo-1507643179173-617d6a6567a6?q=80&w=2000&auto=format&fit=crop",
-    size: "standard", // 1x1
-  },
-  {
-    id: 4,
-    title: "Future Typography",
-    excerpt: "Variable fonts and the web.",
-    date: "Nov 22, 2025",
-    readTime: "4 min",
-    category: "Tech",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop",
-    size: "wide", // spans 2 cols, 1 row
-  },
-  {
-    id: 5,
-    title: "Analog Sounds",
-    excerpt: "Why vinyl is making a comeback.",
-    date: "Nov 15, 2025",
-    readTime: "7 min",
-    category: "Culture",
-    image: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=2074&auto=format&fit=crop",
-    size: "standard", // 1x1
-  },
-]
+// Helper function to estimate read time from content
+const estimateReadTime = (content: string): string => {
+  const wordsPerMinute = 200
+  const wordCount = content.split(/\s+/).length
+  const minutes = Math.ceil(wordCount / wordsPerMinute)
+  return `${minutes} min`
+}
+
+// Map posts to articles with size distribution
+const mapPostsToArticles = (posts: Post[]): Article[] => {
+  const sizePattern: ArticleSize[] = ["large", "tall", "standard", "wide", "standard"]
+  const defaultImage = "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop"
+
+  return posts.map((post, index) => {
+    const size = sizePattern[index % sizePattern.length]
+    const date = post.publishedAt
+      ? format(new Date(post.publishedAt), "MMM dd, yyyy")
+      : format(new Date(post.createdAt), "MMM dd, yyyy")
+
+    return {
+      id: post.id,
+      title: post.title,
+      excerpt: post.excerpt,
+      date,
+      readTime: estimateReadTime(post.content),
+      category: "Blog", // You can add a category field to posts later if needed
+      image: post.coverImage || defaultImage,
+      size,
+      slug: post.slug,
+    }
+  })
+}
 
 const BlogCard = ({ article }: { article: Article }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -88,67 +73,90 @@ const BlogCard = ({ article }: { article: Article }) => {
   }
 
   return (
-    <div
-      className={`group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 ${getGridClasses(article.size)} transition-all duration-500 hover:border-neutral-600`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={article.image}
-          alt={article.title}
-          fill
-          className="object-cover opacity-60 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex h-full flex-col justify-end p-6">
-        {/* Top Tag */}
-        <div className="absolute top-6 left-6">
-          <span className="inline-block rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
-            {article.category}
-          </span>
+    <Link href={`/blog/${article.slug}`}>
+      <div
+        className={`group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 ${getGridClasses(article.size)} cursor-pointer transition-all duration-500 hover:border-neutral-600`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={article.image}
+            alt={article.title}
+            fill
+            className="object-cover opacity-60 transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        {/* Arrow Icon */}
-        <div
-          className={`absolute top-6 right-6 transition-all duration-300 ${isHovered ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"}`}
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
-            <ArrowUpRight size={20} />
-          </div>
-        </div>
-
-        {/* Text Content */}
-        <div className={`transform transition-all duration-500 ${isHovered ? "translate-y-0" : "translate-y-2"}`}>
-          <div className="mb-3 flex items-center gap-4 text-xs text-neutral-400">
-            <span className="flex items-center gap-1">
-              <Calendar size={12} /> {article.date}
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock size={12} /> {article.readTime}
+        {/* Content */}
+        <div className="relative z-10 flex h-full flex-col justify-end p-6">
+          {/* Top Tag */}
+          <div className="absolute top-6 left-6">
+            <span className="inline-block rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+              {article.category}
             </span>
           </div>
 
-          <h3 className="mb-2 font-serif text-2xl leading-tight font-medium text-white group-hover:text-neutral-200">
-            {article.title}
-          </h3>
-
-          <p
-            className={`line-clamp-2 text-sm text-neutral-400 transition-all duration-500 ${isHovered ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}
+          {/* Arrow Icon */}
+          <div
+            className={`absolute top-6 right-6 transition-all duration-300 ${isHovered ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"}`}
           >
-            {article.excerpt}
-          </p>
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
+              <ArrowUpRight size={20} />
+            </div>
+          </div>
+
+          {/* Text Content */}
+          <div className={`transform transition-all duration-500 ${isHovered ? "translate-y-0" : "translate-y-2"}`}>
+            <div className="mb-3 flex items-center gap-4 text-xs text-neutral-400">
+              <span className="flex items-center gap-1">
+                <Calendar size={12} /> {article.date}
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock size={12} /> {article.readTime}
+              </span>
+            </div>
+
+            <h3 className="mb-2 font-serif text-2xl leading-tight font-medium text-white group-hover:text-neutral-200">
+              {article.title}
+            </h3>
+
+            {article.excerpt && (
+              <p
+                className={`line-clamp-2 text-sm text-neutral-400 transition-all duration-500 ${isHovered ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}
+              >
+                {article.excerpt}
+              </p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
 const Blogs = () => {
+  const [articles, setArticles] = useState<Article[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getPosts()
+        const mappedArticles = mapPostsToArticles(posts)
+        setArticles(mappedArticles)
+      } catch (error) {
+        console.error("Failed to fetch posts:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#050505] p-8 font-sans text-white selection:bg-white selection:text-black md:p-16">
       {/* Section Header */}
@@ -162,18 +170,31 @@ const Blogs = () => {
           </p>
         </div>
 
-        <button className="group flex items-center gap-2 border-b border-transparent pb-1 text-sm font-medium text-white transition-colors hover:border-white hover:text-neutral-300">
+        <Link
+          href="/blog"
+          className="group flex items-center gap-2 border-b border-transparent pb-1 text-sm font-medium text-white transition-colors hover:border-white hover:text-neutral-300"
+        >
           View all articles
           <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
-        </button>
+        </Link>
       </header>
 
       {/* The Weird Grid */}
-      <div className="grid auto-rows-[300px] grid-cols-1 gap-4 md:grid-cols-4">
-        {articles.map(article => (
-          <BlogCard key={article.id} article={article} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center py-20">
+          <p className="text-neutral-500">Loading posts...</p>
+        </div>
+      ) : articles.length === 0 ? (
+        <div className="flex items-center justify-center py-20">
+          <p className="text-neutral-500">No posts available yet.</p>
+        </div>
+      ) : (
+        <div className="grid auto-rows-[300px] grid-cols-1 gap-4 md:grid-cols-4">
+          {articles.map(article => (
+            <BlogCard key={article.id} article={article} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

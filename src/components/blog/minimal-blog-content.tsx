@@ -153,11 +153,23 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight, rehypeRaw]}
               components={{
+                h1: ({ children }) => (
+                  <h1
+                    className={`my-4 text-4xl font-medium tracking-tight ${isDark ? "text-white" : "text-neutral-900"}`}
+                  >
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2
+                    className={`my-4 text-3xl font-medium tracking-tight ${isDark ? "text-white" : "text-neutral-900"}`}
+                  >
+                    {children}
+                  </h2>
+                ),
                 h3: ({ children }) => (
                   <h3
-                    className={`mt-16 mb-6 text-2xl font-medium tracking-tight ${
-                      isDark ? "text-white" : "text-neutral-900"
-                    }`}
+                    className={`my-4 text-2xl font-medium tracking-tight ${isDark ? "text-white" : "text-neutral-900"}`}
                   >
                     {children}
                   </h3>

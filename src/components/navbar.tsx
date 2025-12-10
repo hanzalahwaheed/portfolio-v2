@@ -94,9 +94,11 @@ const Navbar = () => {
             >
               Bookery
             </Link>
-            <a href="/resume.pdf" className="font-medium text-white transition-colors duration-200 hover:text-blue-200">
-              {/* Add some special animation here */}
-              Let&apos;s Talk
+            <a
+              href="/resume.pdf"
+              className="rounded-md bg-white px-2 font-medium text-black transition-colors duration-200"
+            >
+              Resume
             </a>
           </div>
         </div>

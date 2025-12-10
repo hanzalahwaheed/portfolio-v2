@@ -13,7 +13,7 @@ export function BlogCard({ post }: BlogCardProps) {
         <div className="flex flex-col gap-2">
           <Link
             href={`/blog/${post.slug}`}
-            className="text-rich-black dark:text-cream hover:text-deep-teal dark:hover:text-turquoise font-instrument text-2xl font-bold tracking-tight transition-colors"
+            className="text-rich-black dark:text-cream hover:text-deep-teal dark:hover:text-turquoise text-2xl font-bold transition-colors"
           >
             {post.title}
           </Link>
