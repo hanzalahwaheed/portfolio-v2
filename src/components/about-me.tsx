@@ -1,7 +1,7 @@
 import Image from "next/image"
-import GitHubCalendar from "./github-calendar"
 import { FlowingCarouselTechStack } from "./flowing-carousel-tech-stack"
 import { MyBuilds } from "./my-builds"
+import { MyWork } from "./my-work"
 import Link from "next/link"
 
 const AboutMe = () => {
@@ -32,38 +32,10 @@ const AboutMe = () => {
             </p>
           </div>
         </div>
-        {/* work */}
-        <div className="mx-auto mt-16 w-full max-w-3xl">
-          <h2 className="text-glow mb-8 text-center text-4xl text-white">my work</h2>
-          <div className="grid gap-8">
-            <div className="rounded-2xl bg-white/4 p-6 backdrop-blur-sm">
-              <div className="flex justify-between">
-                <h3 className="mb-4 text-2xl font-semibold text-white">
-                  <Link
-                    href="https://www.stockinsights.ai"
-                    className="text-[#66acb6] transition-colors hover:text-[#4fe0d0]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    StockInsights AI
-                  </Link>
-                  - Software Development Engineer
-                </h3>
-                <p>18 Months and Ongoing</p>
-              </div>
-              <p className="mb-4 text-gray-300">
-                I&apos;ve been building financial intelligence tools that help investors make better decisions. Working
-                on everything from data pipelines to user interfaces.
-              </p>
-            </div>
-          </div>
-          <div className="mt-4 gap-2">
-            <h2 className="text-glow mb-8 text-center text-4xl text-white">my github</h2>
-            <div className="rounded-2xl bg-white/5 p-6 backdrop-blur-sm">
-              <GitHubCalendar username="hanzalahwaheed" />
-            </div>
-          </div>
-        </div>
+
+        {/* Work, OSS, and GitHub */}
+        <MyWork />
+
         <MyBuilds />
 
         {/* tech stack */}
