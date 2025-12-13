@@ -15,8 +15,6 @@ interface WorkExperience {
   techStack: string[]
 }
 
-
-
 // ============================================================================
 // Data
 // ============================================================================
@@ -33,8 +31,6 @@ const workExperiences: WorkExperience[] = [
   },
 ]
 
-
-
 // ============================================================================
 // Sub-components
 // ============================================================================
@@ -44,7 +40,6 @@ const TechBadge = ({ tech }: { tech: string }) => (
     {tech}
   </span>
 )
-
 
 import { GitCommit, GitMerge, GitPullRequest, CircleDot } from "lucide-react"
 
@@ -62,18 +57,16 @@ const WorkCard = ({ experience }: { experience: WorkExperience }) => (
         </Link>
         <span className="text-white"> - {experience.role}</span>
       </h3>
-      <p className="whitespace-nowrap text-sm text-gray-400">{experience.duration}</p>
+      <p className="text-sm whitespace-nowrap text-gray-400">{experience.duration}</p>
     </div>
-    <p className="mb-4 mt-3 text-gray-300">{experience.description}</p>
+    <p className="mt-3 mb-4 text-gray-300">{experience.description}</p>
     <div className="flex flex-wrap gap-2">
-      {experience.techStack.map((tech) => (
+      {experience.techStack.map(tech => (
         <TechBadge key={tech} tech={tech} />
       ))}
     </div>
   </div>
 )
-
-
 
 // ============================================================================
 // Main Component
@@ -85,7 +78,7 @@ export const MyWork = () => {
       {/* Work Experience */}
       <h2 className="text-glow mb-8 text-center text-4xl text-white">my work</h2>
       <div className="grid gap-6">
-        {workExperiences.map((experience) => (
+        {workExperiences.map(experience => (
           <WorkCard key={experience.company} experience={experience} />
         ))}
       </div>

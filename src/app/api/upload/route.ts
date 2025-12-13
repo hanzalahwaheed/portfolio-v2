@@ -25,18 +25,12 @@ export async function POST(request: NextRequest) {
 
     // Validate file type
     if (!ALLOWED_TYPES.includes(file.type)) {
-      return NextResponse.json(
-        { error: "Invalid file type. Allowed: jpg, jpeg, png, gif, webp" },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: "Invalid file type. Allowed: jpg, jpeg, png, gif, webp" }, { status: 400 })
     }
 
     // Validate file size
     if (file.size > MAX_SIZE) {
-      return NextResponse.json(
-        { error: "File too large. Maximum size: 5MB" },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: "File too large. Maximum size: 5MB" }, { status: 400 })
     }
 
     // Generate unique filename

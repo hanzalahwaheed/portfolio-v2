@@ -26,11 +26,12 @@ const MinimalButton = ({
   form?: string
   onClick?: () => void
 }) => {
-  const baseStyle = "inline-flex items-center justify-center rounded-sm text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none"
+  const baseStyle =
+    "inline-flex items-center justify-center rounded-sm text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none"
   const variants = {
     primary: "bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2",
     ghost: "hover:bg-neutral-900 text-neutral-400 hover:text-white h-9 px-4 py-2",
-    outline: "border border-neutral-800 hover:bg-neutral-900 text-neutral-300 h-9 px-4 py-2"
+    outline: "border border-neutral-800 hover:bg-neutral-900 text-neutral-300 h-9 px-4 py-2",
   }
 
   return (
@@ -48,18 +49,37 @@ const MinimalButton = ({
 
 const MinimalInput = ({ className = "", ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
   <input
-    className={`flex h-10 w-full bg-transparent border-b border-neutral-800 px-0 py-2 text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-white transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+    className={`flex h-10 w-full border-b border-neutral-800 bg-transparent px-0 py-2 text-sm text-white transition-colors placeholder:text-neutral-600 focus:border-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     {...props}
   />
 )
 
-const MinimalLabel = ({ children, className = "", ...props }: { children: React.ReactNode; className?: string; onClick?: () => void }) => (
-  <label className={`text-xs font-mono uppercase tracking-widest text-neutral-500 mb-1.5 block ${className}`} {...props}>
+const MinimalLabel = ({
+  children,
+  className = "",
+  ...props
+}: {
+  children: React.ReactNode
+  className?: string
+  onClick?: () => void
+}) => (
+  <label
+    className={`mb-1.5 block font-mono text-xs tracking-widest text-neutral-500 uppercase ${className}`}
+    {...props}
+  >
     {children}
   </label>
 )
 
-const Toggle = ({ checked, onCheckedChange, name }: { checked: boolean; onCheckedChange: (checked: boolean) => void; name?: string }) => (
+const Toggle = ({
+  checked,
+  onCheckedChange,
+  name,
+}: {
+  checked: boolean
+  onCheckedChange: (checked: boolean) => void
+  name?: string
+}) => (
   <>
     <input type="hidden" name={name} value={checked ? "on" : ""} />
     <button
@@ -67,9 +87,11 @@ const Toggle = ({ checked, onCheckedChange, name }: { checked: boolean; onChecke
       role="switch"
       aria-checked={checked}
       onClick={() => onCheckedChange(!checked)}
-      className={`w-9 h-5 rounded-full relative transition-colors border ${checked ? 'bg-white border-white' : 'bg-black border-neutral-700'}`}
+      className={`relative h-5 w-9 rounded-full border transition-colors ${checked ? "border-white bg-white" : "border-neutral-700 bg-black"}`}
     >
-      <span className={`block w-3 h-3 rounded-full bg-black shadow-sm transition-transform duration-100 will-change-transform ${checked ? 'translate-x-4' : 'translate-x-1'}`} />
+      <span
+        className={`block h-3 w-3 rounded-full bg-black shadow-sm transition-transform duration-100 will-change-transform ${checked ? "translate-x-4" : "translate-x-1"}`}
+      />
     </button>
   </>
 )
@@ -84,7 +106,7 @@ const AutoResizeTextarea = ({
   name,
   id,
   required,
-  defaultValue
+  defaultValue,
 }: {
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
@@ -101,7 +123,7 @@ const AutoResizeTextarea = ({
   useEffect(() => {
     const textarea = textareaRef.current
     if (textarea) {
-      textarea.style.height = 'auto'
+      textarea.style.height = "auto"
       textarea.style.height = `${textarea.scrollHeight}px`
     }
   }, [value])
@@ -124,20 +146,60 @@ const AutoResizeTextarea = ({
 
 // --- Markdown Previewer ---
 const SimpleMarkdown = ({ content }: { content: string }) => {
-  if (!content) return <p className="text-neutral-600 italic font-instrument">Start typing to preview...</p>
+  if (!content) return <p className="font-instrument text-neutral-600 italic">Start typing to preview...</p>
 
-  const lines = content.split('\n')
+  const lines = content.split("\n")
   return (
     <div className="space-y-4">
       {lines.map((line, i) => {
-        if (line.startsWith('### ')) return <h3 key={i} className="text-xl font-medium text-white mt-8 mb-4 font-instrument">{line.replace('### ', '')}</h3>
-        if (line.startsWith('## ')) return <h2 key={i} className="text-2xl font-medium text-white mt-8 mb-4 font-instrument">{line.replace('## ', '')}</h2>
-        if (line.startsWith('# ')) return <h1 key={i} className="text-3xl font-medium text-white mt-8 mb-4 font-instrument">{line.replace('# ', '')}</h1>
-        if (line.startsWith('#### ')) return <h4 key={i} className="text-lg text-neutral-300 mt-6 mb-2 border-b border-neutral-800 pb-2 inline-block font-instrument">{line.replace('#### ', '')}</h4>
-        if (line.startsWith('> ')) return <blockquote key={i} className="pl-4 border-l border-white text-neutral-400 italic font-instrument">{line.replace('> ', '')}</blockquote>
-        if (line.startsWith('```')) return <div key={i} className="bg-neutral-900 border border-neutral-800 p-3 rounded text-xs font-mono text-neutral-400 my-4">Code Block</div>
-        if (line.trim() === '') return <br key={i} />
-        return <p key={i} className="text-neutral-300 leading-relaxed font-light">{line}</p>
+        if (line.startsWith("### "))
+          return (
+            <h3 key={i} className="font-instrument mt-8 mb-4 text-xl font-medium text-white">
+              {line.replace("### ", "")}
+            </h3>
+          )
+        if (line.startsWith("## "))
+          return (
+            <h2 key={i} className="font-instrument mt-8 mb-4 text-2xl font-medium text-white">
+              {line.replace("## ", "")}
+            </h2>
+          )
+        if (line.startsWith("# "))
+          return (
+            <h1 key={i} className="font-instrument mt-8 mb-4 text-3xl font-medium text-white">
+              {line.replace("# ", "")}
+            </h1>
+          )
+        if (line.startsWith("#### "))
+          return (
+            <h4
+              key={i}
+              className="font-instrument mt-6 mb-2 inline-block border-b border-neutral-800 pb-2 text-lg text-neutral-300"
+            >
+              {line.replace("#### ", "")}
+            </h4>
+          )
+        if (line.startsWith("> "))
+          return (
+            <blockquote key={i} className="font-instrument border-l border-white pl-4 text-neutral-400 italic">
+              {line.replace("> ", "")}
+            </blockquote>
+          )
+        if (line.startsWith("```"))
+          return (
+            <div
+              key={i}
+              className="my-4 rounded border border-neutral-800 bg-neutral-900 p-3 font-mono text-xs text-neutral-400"
+            >
+              Code Block
+            </div>
+          )
+        if (line.trim() === "") return <br key={i} />
+        return (
+          <p key={i} className="leading-relaxed font-light text-neutral-300">
+            {line}
+          </p>
+        )
       })}
     </div>
   )
@@ -173,32 +235,31 @@ export function Editor({ post, action }: EditorProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black text-neutral-200 font-instrument selection:bg-neutral-800 selection:text-white">
-
+    <div className="font-instrument min-h-screen bg-black text-neutral-200 selection:bg-neutral-800 selection:text-white">
       {/* Top Bar */}
-      <nav className="fixed top-0 left-0 right-0 h-14 bg-black/80 backdrop-blur-md border-b border-neutral-900 z-50 px-6 flex items-center justify-between">
+      <nav className="fixed top-0 right-0 left-0 z-50 flex h-14 items-center justify-between border-b border-neutral-900 bg-black/80 px-6 backdrop-blur-md">
         <div className="flex items-center gap-4">
-          <Link href="/admin" className="text-neutral-500 hover:text-white transition-colors">
+          <Link href="/admin" className="text-neutral-500 transition-colors hover:text-white">
             <ArrowLeft size={16} />
           </Link>
-          <span className="text-sm font-medium text-neutral-400 font-instrument">
-            {title || "Untitled Post"}
-          </span>
-          <span className="text-neutral-800 text-sm">/</span>
-          <span className={`text-xs px-2 py-0.5 rounded-full border ${published ? 'border-neutral-600 text-neutral-300' : 'border-neutral-800 text-neutral-600'}`}>
-            {published ? 'Published' : 'Draft'}
+          <span className="font-instrument text-sm font-medium text-neutral-400">{title || "Untitled Post"}</span>
+          <span className="text-sm text-neutral-800">/</span>
+          <span
+            className={`rounded-full border px-2 py-0.5 text-xs ${published ? "border-neutral-600 text-neutral-300" : "border-neutral-800 text-neutral-600"}`}
+          >
+            {published ? "Published" : "Draft"}
           </span>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3 mr-4">
-            <MinimalLabel className="!mb-0 !text-[10px] cursor-pointer" onClick={() => setPublished(!published)}>
-              {published ? 'Public' : 'Private'}
+          <div className="mr-4 flex items-center gap-3">
+            <MinimalLabel className="!mb-0 cursor-pointer !text-[10px]" onClick={() => setPublished(!published)}>
+              {published ? "Public" : "Private"}
             </MinimalLabel>
             <Toggle checked={published} onCheckedChange={setPublished} />
           </div>
           <MinimalButton type="submit" form="editor-form" disabled={isPending}>
-            {isPending ? <Loader2 size={14} className="animate-spin mr-2" /> : <Save size={14} className="mr-2" />}
+            {isPending ? <Loader2 size={14} className="mr-2 animate-spin" /> : <Save size={14} className="mr-2" />}
             Save Changes
           </MinimalButton>
         </div>
@@ -208,12 +269,10 @@ export function Editor({ post, action }: EditorProps) {
         {/* Hidden input for published state */}
         <input type="hidden" name="published" value={published ? "on" : ""} />
 
-        <main className="pt-14 h-screen flex flex-col md:flex-row overflow-hidden">
-
+        <main className="flex h-screen flex-col overflow-hidden pt-14 md:flex-row">
           {/* Left Pane: Editor Inputs */}
-          <div className="w-full md:w-1/2 flex flex-col h-full border-r border-neutral-900 overflow-y-auto bg-black">
-            <div className="p-8 md:p-12 max-w-2xl mx-auto w-full space-y-10 pb-32">
-
+          <div className="flex h-full w-full flex-col overflow-y-auto border-r border-neutral-900 bg-black md:w-1/2">
+            <div className="mx-auto w-full max-w-2xl space-y-10 p-8 pb-32 md:p-12">
               {/* Meta Fields */}
               <div className="space-y-8">
                 <div>
@@ -221,9 +280,9 @@ export function Editor({ post, action }: EditorProps) {
                   <MinimalInput
                     name="title"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={e => setTitle(e.target.value)}
                     placeholder="Enter post title..."
-                    className="text-2xl font-instrument"
+                    className="font-instrument text-2xl"
                     required
                   />
                 </div>
@@ -234,7 +293,7 @@ export function Editor({ post, action }: EditorProps) {
                     <MinimalInput
                       name="slug"
                       value={slug}
-                      onChange={(e) => setSlug(e.target.value)}
+                      onChange={e => setSlug(e.target.value)}
                       placeholder="post-url-slug"
                       className="font-mono text-neutral-400"
                       required
@@ -242,11 +301,7 @@ export function Editor({ post, action }: EditorProps) {
                   </div>
                   <div>
                     <MinimalLabel>Read Time</MinimalLabel>
-                    <MinimalInput
-                      name="readTime"
-                      placeholder="e.g. 5 min"
-                      className="font-mono text-neutral-400"
-                    />
+                    <MinimalInput name="readTime" placeholder="e.g. 5 min" className="font-mono text-neutral-400" />
                   </div>
                 </div>
 
@@ -255,9 +310,9 @@ export function Editor({ post, action }: EditorProps) {
                   <AutoResizeTextarea
                     name="excerpt"
                     value={excerpt}
-                    onChange={(e) => setExcerpt(e.target.value)}
+                    onChange={e => setExcerpt(e.target.value)}
                     minRows={2}
-                    className="w-full bg-transparent border-b border-neutral-800 text-sm text-neutral-300 focus:outline-none focus:border-white resize-none py-2 placeholder:text-neutral-700 leading-relaxed"
+                    className="w-full resize-none border-b border-neutral-800 bg-transparent py-2 text-sm leading-relaxed text-neutral-300 placeholder:text-neutral-700 focus:border-white focus:outline-none"
                     placeholder="A brief summary for search engines and social cards..."
                   />
                 </div>
@@ -269,28 +324,28 @@ export function Editor({ post, action }: EditorProps) {
                 <input type="hidden" name="coverImage" value={coverImageUrl} />
 
                 {coverImageUrl ? (
-                  <div className="relative mt-2 group">
+                  <div className="group relative mt-2">
                     <img
                       src={coverImageUrl}
                       alt="Cover"
-                      className="w-full h-48 object-cover rounded-sm opacity-80 group-hover:opacity-100 transition-opacity border border-neutral-800"
+                      className="h-48 w-full rounded-sm border border-neutral-800 object-cover opacity-80 transition-opacity group-hover:opacity-100"
                     />
                     <button
                       type="button"
                       onClick={() => setCoverImageUrl("")}
-                      className="absolute top-2 right-2 bg-black/80 text-white p-1.5 rounded-sm hover:bg-black transition-colors"
+                      className="absolute top-2 right-2 rounded-sm bg-black/80 p-1.5 text-white transition-colors hover:bg-black"
                     >
                       <X size={14} />
                     </button>
                   </div>
                 ) : (
-                  <label className="mt-2 border border-dashed border-neutral-800 rounded-sm p-8 flex flex-col items-center justify-center gap-3 hover:bg-neutral-900/30 transition-colors cursor-pointer group text-neutral-500 hover:text-neutral-400 hover:border-neutral-700 relative">
+                  <label className="group relative mt-2 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-sm border border-dashed border-neutral-800 p-8 text-neutral-500 transition-colors hover:border-neutral-700 hover:bg-neutral-900/30 hover:text-neutral-400">
                     {isUploading ? (
                       <Loader2 size={20} className="animate-spin" />
                     ) : (
-                      <ImageIcon size={20} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                      <ImageIcon size={20} className="opacity-50 transition-opacity group-hover:opacity-100" />
                     )}
-                    <span className="text-xs uppercase tracking-widest">
+                    <span className="text-xs tracking-widest uppercase">
                       {isUploading ? "Uploading..." : "Upload Cover"}
                     </span>
                     <input
@@ -298,7 +353,7 @@ export function Editor({ post, action }: EditorProps) {
                       accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
                       className="hidden"
                       disabled={isUploading}
-                      onChange={async (e) => {
+                      onChange={async e => {
                         const file = e.target.files?.[0]
                         if (!file) return
 
@@ -338,35 +393,34 @@ export function Editor({ post, action }: EditorProps) {
                 <AutoResizeTextarea
                   name="content"
                   value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                  onChange={e => setContent(e.target.value)}
                   minRows={15}
-                  className="w-full bg-transparent text-lg font-mono text-neutral-300 focus:outline-none resize-none placeholder:text-neutral-800 leading-relaxed"
+                  className="w-full resize-none bg-transparent font-mono text-lg leading-relaxed text-neutral-300 placeholder:text-neutral-800 focus:outline-none"
                   placeholder="Write your story here..."
                   required
                 />
               </div>
-
             </div>
           </div>
 
           {/* Right Pane: Live Preview */}
-          <div className="hidden md:flex w-1/2 flex-col h-full bg-[#050505] overflow-y-auto border-l border-neutral-900/50">
-            <div className="sticky top-0 bg-[#050505]/95 backdrop-blur-sm border-b border-neutral-900 px-6 h-10 flex items-center gap-2 z-10">
+          <div className="hidden h-full w-1/2 flex-col overflow-y-auto border-l border-neutral-900/50 bg-[#050505] md:flex">
+            <div className="sticky top-0 z-10 flex h-10 items-center gap-2 border-b border-neutral-900 bg-[#050505]/95 px-6 backdrop-blur-sm">
               <Eye size={12} className="text-neutral-500" />
-              <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">Live Preview</span>
+              <span className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase">Live Preview</span>
             </div>
 
-            <div className="p-12 max-w-2xl mx-auto w-full">
+            <div className="mx-auto w-full max-w-2xl p-12">
               {/* Mimic the Blog Reader Header */}
               <div className="mb-12 text-center md:text-left">
-                <h1 className="text-4xl font-instrument text-white mb-4">{title || "Untitled"}</h1>
-                <p className="text-neutral-500 font-mono text-xs uppercase tracking-widest">
+                <h1 className="font-instrument mb-4 text-4xl text-white">{title || "Untitled"}</h1>
+                <p className="font-mono text-xs tracking-widest text-neutral-500 uppercase">
                   {new Date().toLocaleDateString()} — 5 min read
                 </p>
               </div>
 
               {coverImageUrl && (
-                <div className="mb-10 grayscale opacity-90">
+                <div className="mb-10 opacity-90 grayscale">
                   <img src={coverImageUrl} className="w-full rounded-sm" alt="Cover preview" />
                 </div>
               )}
@@ -376,7 +430,6 @@ export function Editor({ post, action }: EditorProps) {
               </article>
             </div>
           </div>
-
         </main>
       </form>
     </div>

@@ -22,43 +22,48 @@ const ossContributions: OSSContribution[] = [
     project: "Rafiki",
     projectUrl: "https://github.com/arc53/Rafiki",
     githubUrl: "https://github.com/arc53/Rafiki/pull/1",
-    description: "Added support for customizing the chat UI with a dark mode toggle and a custom theme selector. Users can now switch between light and dark modes, and select from a range of pre-defined themes or create their own using the theme editor.",
-    type: "Pull Request"
-  }
-  ,
+    description:
+      "Added support for customizing the chat UI with a dark mode toggle and a custom theme selector. Users can now switch between light and dark modes, and select from a range of pre-defined themes or create their own using the theme editor.",
+    type: "Pull Request",
+  },
   {
     project: "DocsGPT",
     projectUrl: "https://github.com/arc53/DocsGPT",
     githubUrl: "https://github.com/arc53/DocsGPT/pull/2110",
-    description: "Improved modal accessibility and focus clarity. Enhanced visual hierarchy by adding a translucent blurred backdrop behind modals, improving focus and reducing UI distraction during critical actions.",
+    description:
+      "Improved modal accessibility and focus clarity. Enhanced visual hierarchy by adding a translucent blurred backdrop behind modals, improving focus and reducing UI distraction during critical actions.",
     type: "Pull Request",
   },
   {
     project: "DocsGPT",
     projectUrl: "https://github.com/arc53/DocsGPT",
     githubUrl: "https://github.com/arc53/DocsGPT/pull/2073",
-    description: "Refactored ConversationBubble to improve performance. Removed unnecessary hover states and redundant logic, resulting in a smaller, faster, and more maintainable component structure.",
+    description:
+      "Refactored ConversationBubble to improve performance. Removed unnecessary hover states and redundant logic, resulting in a smaller, faster, and more maintainable component structure.",
     type: "Pull Request",
   },
   {
     project: "DocsGPT",
     projectUrl: "https://github.com/arc53/DocsGPT",
     githubUrl: "https://github.com/arc53/DocsGPT/pull/2040",
-    description: "Corrected agent title alignment issue in chat UI. Resolved a bug where an empty object evaluated truthy, causing misalignment. Now perfectly centered.",
+    description:
+      "Corrected agent title alignment issue in chat UI. Resolved a bug where an empty object evaluated truthy, causing misalignment. Now perfectly centered.",
     type: "Pull Request",
   },
   {
     project: "DocsGPT",
     projectUrl: "https://github.com/arc53/DocsGPT",
     githubUrl: "https://github.com/arc53/DocsGPT/pull/1999",
-    description: "Chat UI polishing and UX enhancements. Prevented input border overlap, added hover states for consistency, and introduced slide animations for sidebar interactions.",
+    description:
+      "Chat UI polishing and UX enhancements. Prevented input border overlap, added hover states for consistency, and introduced slide animations for sidebar interactions.",
     type: "Pull Request",
   },
   {
     project: "DocsGPT",
     projectUrl: "https://github.com/arc53/DocsGPT",
     githubUrl: "https://github.com/arc53/DocsGPT/pull/1920",
-    description: "Restored response bubble feedback button visibility. Buttons now remain visible at all times instead of only on hover, improving discoverability and usability.",
+    description:
+      "Restored response bubble feedback button visibility. Buttons now remain visible at all times instead of only on hover, improving discoverability and usability.",
     type: "Pull Request",
   },
 ]
@@ -82,12 +87,10 @@ const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContributi
   return (
     <div className="group relative flex gap-6 pb-8 last:pb-0">
       {/* Timeline Line */}
-      {!isLast && (
-        <div className="absolute left-[19px] top-8 h-full w-px bg-white/10 group-hover:bg-white/20" />
-      )}
+      {!isLast && <div className="absolute top-8 left-[19px] h-full w-px bg-white/10 group-hover:bg-white/20" />}
 
       {/* Icon Node */}
-      <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#111] border border-white/10 shadow-sm transition-all duration-300 group-hover:border-white/30 group-hover:shadow-[0_0_15px_rgba(102,172,182,0.3)]">
+      <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[#111] shadow-sm transition-all duration-300 group-hover:border-white/30 group-hover:shadow-[0_0_15px_rgba(102,172,182,0.3)]">
         {getIcon(contribution.type)}
       </div>
 
@@ -111,7 +114,7 @@ const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContributi
             {contribution.type}
           </Link>
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+        <p className="mt-2 text-sm leading-relaxed text-gray-400 transition-colors group-hover:text-gray-300">
           {contribution.description}
         </p>
       </div>
@@ -125,7 +128,7 @@ const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContributi
 
 export const OssContributions = () => {
   return (
-    <div className="custom-scrollbar max-h-[500px] overflow-y-auto pr-4 pl-2 pt-2">
+    <div className="custom-scrollbar max-h-[500px] overflow-y-auto pt-2 pr-4 pl-2">
       {ossContributions.map((contribution, index) => (
         <OSSTimelineItem
           key={contribution.project}
