@@ -1,76 +1,9 @@
 import Link from "next/link"
 import { GitMerge, GitPullRequest, CircleDot } from "lucide-react"
 
-// ============================================================================
-// Types
-// ============================================================================
+import { ossContributions, OSSContribution } from "../config"
 
-interface OSSContribution {
-  project: string
-  projectUrl: string
-  githubUrl: string
-  description: string
-  type: "Pull Request" | "Merge Request" | "Issue"
-}
 
-// ============================================================================
-// Data
-// ============================================================================
-
-const ossContributions: OSSContribution[] = [
-  {
-    project: "Rafiki",
-    projectUrl: "https://github.com/arc53/Rafiki",
-    githubUrl: "https://github.com/arc53/Rafiki/pull/1",
-    description:
-      "Added support for customizing the chat UI with a dark mode toggle and a custom theme selector. Users can now switch between light and dark modes, and select from a range of pre-defined themes or create their own using the theme editor.",
-    type: "Pull Request",
-  },
-  {
-    project: "DocsGPT",
-    projectUrl: "https://github.com/arc53/DocsGPT",
-    githubUrl: "https://github.com/arc53/DocsGPT/pull/2110",
-    description:
-      "Improved modal accessibility and focus clarity. Enhanced visual hierarchy by adding a translucent blurred backdrop behind modals, improving focus and reducing UI distraction during critical actions.",
-    type: "Pull Request",
-  },
-  {
-    project: "DocsGPT",
-    projectUrl: "https://github.com/arc53/DocsGPT",
-    githubUrl: "https://github.com/arc53/DocsGPT/pull/2073",
-    description:
-      "Refactored ConversationBubble to improve performance. Removed unnecessary hover states and redundant logic, resulting in a smaller, faster, and more maintainable component structure.",
-    type: "Pull Request",
-  },
-  {
-    project: "DocsGPT",
-    projectUrl: "https://github.com/arc53/DocsGPT",
-    githubUrl: "https://github.com/arc53/DocsGPT/pull/2040",
-    description:
-      "Corrected agent title alignment issue in chat UI. Resolved a bug where an empty object evaluated truthy, causing misalignment. Now perfectly centered.",
-    type: "Pull Request",
-  },
-  {
-    project: "DocsGPT",
-    projectUrl: "https://github.com/arc53/DocsGPT",
-    githubUrl: "https://github.com/arc53/DocsGPT/pull/1999",
-    description:
-      "Chat UI polishing and UX enhancements. Prevented input border overlap, added hover states for consistency, and introduced slide animations for sidebar interactions.",
-    type: "Pull Request",
-  },
-  {
-    project: "DocsGPT",
-    projectUrl: "https://github.com/arc53/DocsGPT",
-    githubUrl: "https://github.com/arc53/DocsGPT/pull/1920",
-    description:
-      "Restored response bubble feedback button visibility. Buttons now remain visible at all times instead of only on hover, improving discoverability and usability.",
-    type: "Pull Request",
-  },
-]
-
-// ============================================================================
-// Sub-components
-// ============================================================================
 
 const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContribution; isLast: boolean }) => {
   const getIcon = (type: OSSContribution["type"]) => {
@@ -122,16 +55,12 @@ const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContributi
   )
 }
 
-// ============================================================================
-// Main Component
-// ============================================================================
-
 export const OssContributions = () => {
   return (
     <div className="custom-scrollbar max-h-[500px] overflow-y-auto pt-2 pr-4 pl-2">
       {ossContributions.map((contribution, index) => (
         <OSSTimelineItem
-          key={contribution.project}
+          key={contribution.githubUrl}
           contribution={contribution}
           isLast={index === ossContributions.length - 1}
         />

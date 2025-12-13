@@ -2,41 +2,13 @@ import Link from "next/link"
 import GitHubCalendar from "./github-calendar"
 import OssContributions from "./oss-contributions"
 
-// ============================================================================
-// Types
-// ============================================================================
+import { workExperiences, personalDetails, WorkExperience } from "../config"
 
-interface WorkExperience {
-  company: string
-  companyUrl: string
-  role: string
-  duration: string
-  description: string
-  techStack: string[]
-}
 
-// ============================================================================
-// Data
-// ============================================================================
 
-const workExperiences: WorkExperience[] = [
-  {
-    company: "StockInsights AI",
-    companyUrl: "https://www.stockinsights.ai",
-    role: "Software Development Engineer",
-    duration: "18 Months and Ongoing",
-    description:
-      "I've been building financial intelligence tools that help investors make better decisions. Working on everything from data pipelines to user interfaces.",
-    techStack: ["Python", "TypeScript", "Next.js", "PostgreSQL", "AWS", "Docker"],
-  },
-]
-
-// ============================================================================
-// Sub-components
-// ============================================================================
 
 const TechBadge = ({ tech }: { tech: string }) => (
-  <span className="rounded-lg bg-white/10 px-3 py-1.5 text-sm font-medium text-gray-300 transition-colors hover:bg-white/15 hover:text-white">
+  <span className="rounded-lg bg-white/10 px-3 py-1.5 text-sm font-medium tracking-wider text-gray-300 transition-colors hover:bg-white/15 hover:text-white">
     {tech}
   </span>
 )
@@ -68,9 +40,6 @@ const WorkCard = ({ experience }: { experience: WorkExperience }) => (
   </div>
 )
 
-// ============================================================================
-// Main Component
-// ============================================================================
 
 export const MyWork = () => {
   return (
@@ -93,7 +62,7 @@ export const MyWork = () => {
       <div className="mt-12">
         <h2 className="text-glow mb-8 text-center text-4xl text-white">my github</h2>
         <div className="rounded-2xl bg-white/5 p-6 backdrop-blur-sm">
-          <GitHubCalendar username="hanzalahwaheed" />
+          <GitHubCalendar username={personalDetails.githubUsername} />
         </div>
       </div>
     </div>

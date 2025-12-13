@@ -1,33 +1,31 @@
 import Link from "next/link"
 import React from "react"
-import { SocialIcon } from "react-social-icons"
+import { socialLinks } from "../config"
 
-const socials = () => {
+
+const Socials = () => {
   return (
-    <div className="flex space-x-3">
-      {/* <SocialIcon
-        url="https://github.com/hanzalahwaheed"
-        style={{ height: 32, width: 32 }}
-        bgColor="transparent"
-        fgColor="white"
-      />
-      <SocialIcon
-        url="https://linkedin.com/in/hanzalahwaheed"
-        style={{ height: 32, width: 32 }}
-        bgColor="transparent"
-        fgColor="white"
-      />
-      <SocialIcon
-        url="https://twitter.com/hanzalahwaheed"
-        style={{ height: 32, width: 32 }}
-        bgColor="transparent"
-        fgColor="white"
-      /> */}
-      <Link href="https://github.com/hanzalahwaheed">Github</Link>
-      <Link href="https://linkedin.com/in/hanzalahwaheed">Linkedin</Link>
-      <Link href="https://twitter.com/hanzalahwaheed">Twitter</Link>
+    <div className="flex space-x-4">
+      <Link
+        href={socialLinks.github}
+        className="font-bold text-white transition-all duration-300 hover:scale-110"
+      >
+        Github
+      </Link>
+      <Link
+        href={socialLinks.twitter}
+        className="font-bold text-white transition-all duration-300 hover:scale-110"
+      >
+        Twitter
+      </Link>
+      <Link
+        href={socialLinks.linkedin}
+        className="font-bold text-white transition-all duration-300 hover:scale-110"
+      >
+        Linkedin
+      </Link>
     </div>
   )
 }
 
-export default socials
+export default Socials
