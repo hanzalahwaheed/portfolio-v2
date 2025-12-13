@@ -37,9 +37,9 @@ export function FlowingCarouselTechStack({ className }: FlowingCarouselProps) {
   const bottomTechnologies = technologies.slice(8)
 
   return (
-    <div className={cn("relative w-full overflow-hidden bg-black py-8", className)}>
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-black to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-black to-transparent" />
+    <div className={cn("relative w-full overflow-hidden bg-[#0A0A0A] py-8", className)}>
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#0A0A0A] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#0A0A0A] to-transparent" />
 
       {/* Top row - flowing left to right */}
       <div className="relative mb-6 overflow-hidden">
