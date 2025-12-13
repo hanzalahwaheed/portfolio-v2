@@ -6,6 +6,7 @@ import Socials from "@/components/socials"
 import Blogs from "@/components/blogs"
 import Bookery from "@/components/bookery"
 import MoreBelow from "@/components/more-below"
+import Grind from "@/components/grind"
 import Link from "next/link"
 
 const Home = () => {
@@ -56,6 +57,10 @@ const Home = () => {
         <Bookery />
       </div>
       <Lines />
+
+      <Grind />
+      <Lines />
+
 
       <footer className="flex h-48 flex-col items-center justify-center gap-4 bg-[#061113]">
         <p>Design and Development by Hanzalah Waheed</p>
