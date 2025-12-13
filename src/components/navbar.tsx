@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Link, Events, scrollSpy } from "react-scroll"
+import NextLink from "next/link"
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -50,9 +51,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 z-50 min-w-xl -translate-x-1/2 transform text-lg transition-all duration-300 ease-in-out ${
-        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-      }`}
+      className={`fixed top-4 left-1/2 z-50 min-w-xl -translate-x-1/2 transform text-lg transition-all duration-300 ease-in-out ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        }`}
     >
       <div className="min-h-8 rounded-xl bg-white/10 shadow-lg backdrop-blur-md">
         <div className="flex items-center justify-center space-x-4 px-4 py-2">
@@ -94,12 +94,12 @@ const Navbar = () => {
             >
               Bookery
             </Link>
-            <a
-              href="/resume.pdf"
+            <NextLink
+              href="/resume"
               className="rounded-md bg-white px-2 font-medium text-black transition-colors duration-200"
             >
               Resume
-            </a>
+            </NextLink>
           </div>
         </div>
       </div>
