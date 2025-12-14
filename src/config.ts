@@ -19,10 +19,10 @@ export interface OSSContribution {
 export const ossContributions: OSSContribution[] = [
   {
     project: "Rafiki",
-    projectUrl: "https://github.com/arc53/Rafiki",
-    githubUrl: "https://github.com/arc53/Rafiki/pull/1",
+    projectUrl: "https://github.com/interledger/rafiki",
+    githubUrl: "https://github.com/interledger/rafiki/pull/3735",
     description:
-      "Added support for customizing the chat UI with a dark mode toggle and a custom theme selector. Users can now switch between light and dark modes, and select from a range of pre-defined themes or create their own using the theme editor.",
+      "Chore: Refactor the codebase to implment DRY principles and improve code quality by creating a separate FormGroup component.",
     type: "Pull Request",
   },
   {
