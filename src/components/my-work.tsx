@@ -43,7 +43,7 @@ const WorkCard = ({ experience }: { experience: WorkExperience }) => (
 
 export const MyWork = () => {
   return (
-    <div className="mx-auto mt-16 w-full max-w-4xl">
+    <div className="mx-auto mt-16 w-full max-w-3xl">
       {/* Work Experience */}
       <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my work</h2>
       <div className="grid gap-6">
