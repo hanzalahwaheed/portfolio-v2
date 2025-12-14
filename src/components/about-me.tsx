@@ -21,7 +21,7 @@ const AboutMe = () => {
             <p className="flex-1 text-lg leading-relaxed font-medium text-gray-300 md:text-2xl">
               sup? I enjoy turning vague ideas and messy data into clean and scalable software.
               <br />
-              I'm currently building AI-powered financial tools at <Link
+              I&apos;m currently building AI-powered financial tools at <Link
                 href="https://www.stockinsights.ai"
                 className="text-[#66acb6] transition-colors hover:text-[#4fe0d0]"
                 target="_blank"

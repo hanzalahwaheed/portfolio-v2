@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "hanzlahwaheed",
-  description: "hanzlah waheed portfolio - hollow knight theme",
+  description: "Hanzlah Waheed Portfolio",
 }
 
 export default function RootLayout({
