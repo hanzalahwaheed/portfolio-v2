@@ -5,8 +5,8 @@ import { builds } from "../config"
 
 export const MyBuilds = () => {
   return (
-    <div id="builds" className="mx-auto mt-16 w-full max-w-3xl">
-      <h2 className="text-glow mb-8 text-center text-4xl text-white">my builds</h2>
+    <div id="builds" className="mx-auto mt-16 w-full max-w-4xl">
+      <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my builds</h2>
       <ul className="custom-scrollbar max-h-[500px] space-y-6 overflow-y-auto pr-2">
         {builds.map((build, index) => (
           <li key={index} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">

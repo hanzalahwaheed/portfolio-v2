@@ -51,13 +51,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 z-50 min-w-xl -translate-x-1/2 transform text-lg transition-all duration-300 ease-in-out ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      className={`fixed top-4 left-1/2 z-50 w-[95%] -translate-x-1/2 transform text-sm transition-all duration-300 ease-in-out md:w-auto md:min-w-xl md:text-lg ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
     >
       <div className="min-h-8 rounded-xl bg-white/10 shadow-lg backdrop-blur-md">
         <div className="flex items-center justify-center space-x-4 px-4 py-2">
           {/* Navigation Links */}
-          <div className="flex items-center justify-center space-x-6">
+          <div className="flex items-center justify-center space-x-3 md:space-x-6">
             <Link
               to="about-me"
               smooth={true}

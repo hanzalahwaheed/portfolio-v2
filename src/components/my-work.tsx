@@ -43,9 +43,9 @@ const WorkCard = ({ experience }: { experience: WorkExperience }) => (
 
 export const MyWork = () => {
   return (
-    <div className="mx-auto mt-16 w-full max-w-3xl">
+    <div className="mx-auto mt-16 w-full max-w-4xl">
       {/* Work Experience */}
-      <h2 className="text-glow mb-8 text-center text-4xl text-white">my work</h2>
+      <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my work</h2>
       <div className="grid gap-6">
         {workExperiences.map(experience => (
           <WorkCard key={experience.company} experience={experience} />
@@ -54,14 +54,14 @@ export const MyWork = () => {
 
       {/* OSS Contributions */}
       <div className="mt-12">
-        <h2 className="text-glow mb-8 text-center text-4xl text-white">open source</h2>
+        <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">open source</h2>
         <OssContributions />
       </div>
 
       {/* GitHub Calendar */}
       <div className="mt-12">
-        <h2 className="text-glow mb-8 text-center text-4xl text-white">my github</h2>
-        <div className="rounded-2xl bg-white/5 p-6 backdrop-blur-sm">
+        <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my github</h2>
+        <div className="w-full max-w-full rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6">
           <GitHubCalendar username={personalDetails.githubUsername} />
         </div>
       </div>

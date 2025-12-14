@@ -24,11 +24,11 @@ const Home = () => {
             }}
           >
             <div className="absolute top-[45%] left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-transparent">
-              <h1 className={`${instrumentSerif.className} bg-gradient-background text-glow text-8xl text-white`}>
+              <h1 className={`${instrumentSerif.className} bg-gradient-background text-glow text-5xl text-white md:text-7xl lg:text-8xl`}>
                 Hanzalah Waheed
               </h1>
               <br />
-              <h2 className={`${instrumentSerif.className} text-xl text-white`}>
+              <h2 className={`${instrumentSerif.className} text-lg text-white md:text-xl`}>
                 Trying to understand how things work
               </h2>
               <div className="mt-8 flex items-center justify-center space-x-4">

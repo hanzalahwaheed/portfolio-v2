@@ -9,8 +9,8 @@ interface GitHubCalendarProps {
 
 const GitHubCalendarComponent = ({ username, className = "" }: GitHubCalendarProps) => {
   return (
-    <div className={`${className}`}>
-      <div className="github-calendar-wrapper custom-scrollbar overflow-x-auto pb-2">
+    <div className={`w-full ${className}`}>
+      <div className="github-calendar-wrapper custom-scrollbar w-full overflow-x-auto pb-2">
         <GitHubCalendar
           username={username}
           year={new Date().getFullYear()}

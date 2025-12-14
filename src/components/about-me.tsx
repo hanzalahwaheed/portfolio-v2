@@ -6,18 +6,18 @@ import Link from "next/link"
 
 const AboutMe = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center px-4 py-16">
+    <div className="relative flex w-full flex-col items-center justify-center overflow-x-hidden px-4 py-16">
       {/* Content with relative z-index to appear above background */}
-      <div className="relative z-10">
-        <h1 className="text-glow mb-16 text-center text-4xl font-bold text-white">my story so far, tldr;</h1>
+      <div className="relative z-10 w-full">
+        <h1 className="text-glow mb-16 text-center text-3xl font-bold text-white md:text-4xl">my story so far, tldr;</h1>
 
         {/* basic intro */}
-        <div className="mx-auto mb-16 flex h-full w-full max-w-3xl flex-col items-center justify-center gap-8 lg:flex-row">
+        <div className="mx-auto mb-16 flex h-full w-full max-w-4xl flex-col items-center justify-center gap-8 lg:flex-row">
           <div className="flex-shrink-0">
             <Image src="/images/pfp.jpeg" alt="Hanzalah Waheed" width={250} height={250} className="rounded-3xl" />
           </div>
           <div className="flex h-full flex-1 flex-col justify-center text-center lg:text-left">
-            <p className="flex-1 text-2xl leading-relaxed font-medium text-gray-300">
+            <p className="flex-1 text-lg leading-relaxed font-medium text-gray-300 md:text-2xl">
               I&apos;m a software engineer with a deep interest in building products that help people live better lives.
               I&apos;m currently working at{" "}
               <Link
@@ -39,8 +39,8 @@ const AboutMe = () => {
         <MyBuilds />
 
         {/* tech stack */}
-        <div className="mx-auto mt-16 w-full max-w-3xl">
-          <h2 className="text-glow mb-8 text-center text-4xl text-white">Tech Stack</h2>
+        <div className="mx-auto mt-16 w-full max-w-4xl">
+          <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">Tech Stack</h2>
           <FlowingCarouselTechStack />
           {/* <TechStack /> */}
         </div>
