@@ -209,8 +209,13 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                 ),
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 code: ({ className, children, ...props }: any) => {
+                  // Detect inline vs block code:
+                  // - Fenced code blocks (```) get a language-* class from rehype-highlight
+                  // - Inline code (`) does NOT get a language-* class
+                  const hasLanguage = Boolean(className && /language-(\w+)/.exec(className))
                   const match = /language-(\w+)/.exec(className || "")
-                  const isInline = !match
+                  const isInline = !hasLanguage
+
                   const codeString = String(children).replace(/\n$/, "")
                   let currentIndex = ""
                   if (!isInline) {
@@ -218,12 +223,14 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                   }
 
                   if (isInline) {
+                    // Inline code: semantic styling only (no font-size)
+                    // Typography is controlled by CSS context (.markdown-content h1 code, p code, etc.)
                     return (
                       <code
-                        className={`border px-1 py-0.5 font-mono text-sm ${
+                        className={`inline-code rounded border font-mono ${
                           isDark
-                            ? "border-neutral-800 bg-neutral-900 text-neutral-300"
-                            : "border-neutral-300 bg-neutral-100 text-neutral-800"
+                            ? "border-neutral-700 bg-neutral-800 text-amber-200"
+                            : "border-neutral-300 bg-neutral-100 text-rose-700"
                         }`}
                         {...props}
                       >
