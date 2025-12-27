@@ -3,8 +3,6 @@ import { GitMerge, GitPullRequest, CircleDot } from "lucide-react"
 
 import { ossContributions, OSSContribution } from "../config"
 
-
-
 const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContribution; isLast: boolean }) => {
   const getIcon = (type: OSSContribution["type"]) => {
     switch (type) {

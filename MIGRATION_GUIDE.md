@@ -13,6 +13,7 @@ npm run db:verify
 ```
 
 This will show you:
+
 - The actual table name (could be `Post` or `post`)
 - All columns and their types
 - Row count
@@ -34,6 +35,7 @@ npm run db:push
 ```
 
 This command will:
+
 - Compare your Drizzle schema with the existing database
 - Show you what changes it will make
 - Only add/modify columns if needed

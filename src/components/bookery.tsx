@@ -54,10 +54,11 @@ const Bookery = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`rounded-full border px-4 py-1.5 text-xs font-medium tracking-wider uppercase transition-all duration-300 ${selectedCategory === category
-                ? "border-[#66acb6] bg-[#66acb6]/20 text-[#66acb6]"
-                : "border-[#1E383C] bg-transparent text-neutral-500 hover:border-[#66acb6]/50 hover:text-neutral-300"
-                }`}
+              className={`rounded-full border px-4 py-1.5 text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
+                selectedCategory === category
+                  ? "border-[#66acb6] bg-[#66acb6]/20 text-[#66acb6]"
+                  : "border-[#1E383C] bg-transparent text-neutral-500 hover:border-[#66acb6]/50 hover:text-neutral-300"
+              }`}
             >
               {category}
             </button>
@@ -69,33 +70,38 @@ const Bookery = () => {
             {filteredLibrary.map(book => (
               <li key={book.id} className="group cursor-pointer" onClick={() => handleBookChange(book)}>
                 <div
-                  className={`flex items-baseline gap-4 transition-all duration-300 ${activeBook.id === book.id ? "translate-x-4" : "hover:translate-x-2"
-                    }`}
+                  className={`flex items-baseline gap-4 transition-all duration-300 ${
+                    activeBook.id === book.id ? "translate-x-4" : "hover:translate-x-2"
+                  }`}
                 >
                   <span
-                    className={`font-mono text-xs transition-colors duration-300 ${activeBook.id === book.id ? "text-white" : "text-neutral-600 group-hover:text-neutral-400"
-                      }`}
+                    className={`font-mono text-xs transition-colors duration-300 ${
+                      activeBook.id === book.id ? "text-white" : "text-neutral-600 group-hover:text-neutral-400"
+                    }`}
                   >
                     {String(book.id).padStart(2, "0")}
                   </span>
                   <div className="flex flex-col">
                     <span
-                      className={`font-serif text-3xl leading-none transition-all duration-300 md:text-4xl ${activeBook.id === book.id ? "text-white" : "text-neutral-500 group-hover:text-neutral-300"
-                        }`}
+                      className={`font-serif text-3xl leading-none transition-all duration-300 md:text-4xl ${
+                        activeBook.id === book.id ? "text-white" : "text-neutral-500 group-hover:text-neutral-300"
+                      }`}
                     >
                       {book.title}
                     </span>
                     {book.subtitle && (
                       <span
-                        className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
-                          }`}
+                        className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${
+                          activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
+                        }`}
                       >
                         {book.subtitle}
                       </span>
                     )}
                     <span
-                      className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
-                        }`}
+                      className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${
+                        activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
+                      }`}
                     >
                       {book.author}
                     </span>
@@ -115,8 +121,9 @@ const Bookery = () => {
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center p-8 md:w-7/12 md:p-16">
         {/* Book Container */}
         <div
-          className={`relative transform transition-all duration-500 ease-out ${isTransitioning ? "translate-y-4 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
-            }`}
+          className={`relative transform transition-all duration-500 ease-out ${
+            isTransitioning ? "translate-y-4 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
+          }`}
         >
           {/* Floating Effect Wrapper */}
           <div className="animate-float relative">
@@ -175,8 +182,9 @@ const Bookery = () => {
 
         {/* Category Label (floating in background) */}
         <div
-          className={`absolute top-12 right-12 transition-opacity duration-700 ${isTransitioning ? "opacity-0" : "opacity-100"
-            }`}
+          className={`absolute top-12 right-12 transition-opacity duration-700 ${
+            isTransitioning ? "opacity-0" : "opacity-100"
+          }`}
         >
           <span className="pointer-events-none font-serif text-[10rem] leading-none text-white/5 select-none">
             {activeBook.category.charAt(0)}

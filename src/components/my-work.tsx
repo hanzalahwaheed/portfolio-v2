@@ -4,9 +4,6 @@ import OssContributions from "./oss-contributions"
 
 import { workExperiences, personalDetails, WorkExperience } from "../config"
 
-
-
-
 const TechBadge = ({ tech }: { tech: string }) => (
   <span className="rounded-lg bg-white/10 px-3 py-1.5 text-sm font-medium tracking-wider text-gray-300 transition-colors hover:bg-white/15 hover:text-white">
     {tech}
@@ -39,7 +36,6 @@ const WorkCard = ({ experience }: { experience: WorkExperience }) => (
     </div>
   </div>
 )
-
 
 export const MyWork = () => {
   return (

@@ -24,7 +24,9 @@ const Home = () => {
             }}
           >
             <div className="absolute top-[45%] left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-transparent">
-              <h1 className={`${instrumentSerif.className} bg-gradient-background text-glow text-5xl text-white md:text-7xl lg:text-8xl`}>
+              <h1
+                className={`${instrumentSerif.className} bg-gradient-background text-glow text-5xl text-white md:text-7xl lg:text-8xl`}
+              >
                 Hanzalah Waheed
               </h1>
               <br />
@@ -60,7 +62,6 @@ const Home = () => {
 
       <Grind />
       <Lines />
-
 
       <footer className="flex h-48 flex-col items-center justify-center gap-4 bg-[#061113]">
         <p>Design and Development by Hanzalah Waheed</p>
