@@ -1,4 +1,4 @@
-import { updatePost } from "@/app/actions/blog"
+import { updatePost } from "@/app/actions/blogs"
 import { Editor } from "@/components/blog/editor"
 import { notFound } from "next/navigation"
 import { db, posts } from "@/db"

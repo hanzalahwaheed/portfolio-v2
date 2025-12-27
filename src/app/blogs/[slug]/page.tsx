@@ -1,4 +1,4 @@
-import { getPost } from "@/app/actions/blog"
+import { getPost } from "@/app/actions/blogs"
 import { notFound } from "next/navigation"
 import { MinimalBlogContent } from "@/components/blog/minimal-blog-content"
 

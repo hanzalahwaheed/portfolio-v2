@@ -78,15 +78,13 @@ const Navbar = () => {
             >
               Builds
             </Link>
-            <Link
-              to="blogs"
-              smooth={true}
-              duration={500}
-              offset={-80}
+            <NextLink
+              href="/blogs"
+              target="_blank"
               className="cursor-pointer font-medium text-white transition-colors duration-200 hover:text-blue-200"
             >
               Blogs
-            </Link>
+            </NextLink>
             <Link
               to="bookery"
               smooth={true}

@@ -77,7 +77,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
         }`}
       >
         <div className="container mx-auto flex h-14 max-w-3xl items-center justify-between px-6">
-          <Link href="/blog" className="flex items-center gap-3 text-sm transition-colors">
+          <Link href="/blogs" className="flex items-center gap-3 text-sm transition-colors">
             <span
               className={`text-xs tracking-widest uppercase ${
                 isDark ? "text-neutral-500 hover:text-white" : "text-neutral-600 hover:text-neutral-900"
@@ -336,7 +336,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
           }`}
         >
           <span>End of Article</span>
-          <Link href="/blog" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-neutral-900"}`}>
+          <Link href="/blogs" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-neutral-900"}`}>
             Next Post &rarr;
           </Link>
         </div>

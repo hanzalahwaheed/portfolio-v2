@@ -1,4 +1,4 @@
-import { createPost } from "@/app/actions/blog"
+import { createPost } from "@/app/actions/blogs"
 import { Editor } from "@/components/blog/editor"
 import { redirect } from "next/navigation"
 

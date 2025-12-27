@@ -1,4 +1,4 @@
-import { getPosts } from "@/app/actions/blog"
+import { getPosts } from "@/app/actions/blogs"
 import { BlogCard } from "@/components/blog/blog-card"
 import Image from "next/image"
 

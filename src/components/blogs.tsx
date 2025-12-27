@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, Calendar, Clock, ChevronRight } from "lucide-react"
-import { getPosts } from "@/app/actions/blog"
+import { getPosts } from "@/app/actions/blogs"
 import { Post } from "@/db"
 import { format } from "date-fns"
 
@@ -73,7 +73,7 @@ const BlogCard = ({ article }: { article: Article }) => {
   }
 
   return (
-    <Link href={`/blog/${article.slug}`}>
+    <Link href={`/blogs/${article.slug}`}>
       <div
         className={`group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 ${getGridClasses(article.size)} cursor-pointer transition-all duration-500 hover:border-neutral-600`}
         onMouseEnter={() => setIsHovered(true)}
@@ -169,7 +169,7 @@ const Blogs = () => {
         </div>
 
         <Link
-          href="/blog"
+          href="/blogs"
           className="group flex items-center gap-2 border-b border-transparent pb-1 text-sm font-medium text-white transition-colors hover:border-white hover:text-neutral-300"
         >
           View all articles

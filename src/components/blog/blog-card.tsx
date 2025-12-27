@@ -12,7 +12,7 @@ export function BlogCard({ post }: BlogCardProps) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Link
-            href={`/blog/${post.slug}`}
+            href={`/blogs/${post.slug}`}
             className="text-rich-black dark:text-cream hover:text-deep-teal dark:hover:text-turquoise text-2xl font-bold transition-colors"
           >
             {post.title}
@@ -28,7 +28,7 @@ export function BlogCard({ post }: BlogCardProps) {
         )}
       </div>
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/blogs/${post.slug}`}
         className="ring-offset-background focus-visible:ring-deep-teal absolute inset-0 rounded-xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         <span className="sr-only">View post</span>

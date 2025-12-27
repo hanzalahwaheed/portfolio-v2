@@ -1,4 +1,4 @@
-import { getAllPostsAdmin, deletePost } from "@/app/actions/blog"
+import { getAllPostsAdmin, deletePost } from "@/app/actions/blogs"
 import { format } from "date-fns"
 import Link from "next/link"
 import { Plus, Pencil, Trash2, FileText } from "lucide-react"
