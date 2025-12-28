@@ -137,7 +137,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={post.coverImage} alt={post.title} className="h-auto w-full" />
             <p className={`mt-2 text-right font-mono text-xs ${isDark ? "text-neutral-600" : "text-neutral-400"}`}>
-              Photo via Unsplash
+              Photo generated with Google Nanobanana Pro
             </p>
           </div>
         )}
