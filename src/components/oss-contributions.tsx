@@ -5,6 +5,7 @@ import Link from "next/link"
 import { GitMerge, GitPullRequest, CircleDot, Loader2 } from "lucide-react"
 
 import { ossContributions as staticContributions, OSSContribution, personalDetails } from "../config"
+import { handleApiResponse } from "@/lib/api-client"
 
 const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContribution; isLast: boolean }) => {
   const getIcon = (type: OSSContribution["type"]) => {
@@ -64,8 +65,7 @@ export const OssContributions = () => {
     const fetchContributions = async () => {
       try {
         const response = await fetch(`/api/github-latest-contributions?username=${personalDetails.githubUsername}`)
-        if (!response.ok) throw new Error("Failed to fetch")
-        const data = await response.json()
+        const data = await handleApiResponse<{ contributions: OSSContribution[] }>(response)
         if (data.contributions && data.contributions.length > 0) {
           setContributions(data.contributions)
         }

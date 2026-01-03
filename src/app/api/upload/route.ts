@@ -30,7 +30,12 @@ export async function POST(request: NextRequest) {
 
     // Validate file size
     if (file.size > MAX_SIZE) {
-      return NextResponse.json({ error: "File too large. Maximum size: 5MB" }, { status: 400 })
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1)
+      const maxSizeMB = (MAX_SIZE / (1024 * 1024)).toFixed(0)
+      return NextResponse.json(
+        { error: `File size is ${fileSizeMB} MB, maximum allowed is ${maxSizeMB} MB` },
+        { status: 400 }
+      )
     }
 
     // Generate unique filename

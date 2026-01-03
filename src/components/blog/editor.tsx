@@ -1,11 +1,10 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import TextareaAutosize from "react-textarea-autosize"
-import ReactMarkdown from "react-markdown"
 import { Post } from "@/db"
 import Link from "next/link"
 import { ArrowLeft, Loader2, Save, ImageIcon, Eye, X } from "lucide-react"
+import { handleApiResponse } from "@/lib/api-client"
 
 // --- Minimalist UI Components ---
 
@@ -324,19 +323,61 @@ export function Editor({ post, action }: EditorProps) {
                 <input type="hidden" name="coverImage" value={coverImageUrl} />
 
                 {coverImageUrl ? (
-                  <div className="group relative mt-2">
-                    <img
-                      src={coverImageUrl}
-                      alt="Cover"
-                      className="h-48 w-full rounded-sm border border-neutral-800 object-cover opacity-80 transition-opacity group-hover:opacity-100"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setCoverImageUrl("")}
-                      className="absolute top-2 right-2 rounded-sm bg-black/80 p-1.5 text-white transition-colors hover:bg-black"
-                    >
-                      <X size={14} />
-                    </button>
+                  <div className="space-y-2">
+                    <div className="group relative mt-2">
+                      <img
+                        src={coverImageUrl}
+                        alt="Cover"
+                        className="h-48 w-full rounded-sm border border-neutral-800 object-cover opacity-80 transition-opacity group-hover:opacity-100"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setCoverImageUrl("")}
+                        className="absolute top-2 right-2 rounded-sm bg-black/80 p-1.5 text-white transition-colors hover:bg-black"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                    <label className="group relative flex cursor-pointer items-center justify-center gap-2 rounded-sm border border-neutral-800 p-2 text-neutral-500 transition-colors hover:border-neutral-700 hover:bg-neutral-900/30 hover:text-neutral-400">
+                      {isUploading ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : (
+                        <ImageIcon size={14} className="opacity-50 transition-opacity group-hover:opacity-100" />
+                      )}
+                      <span className="text-xs tracking-widest uppercase">
+                        {isUploading ? "Uploading..." : "Change Image"}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+                        className="hidden"
+                        disabled={isUploading}
+                        onChange={async e => {
+                          const file = e.target.files?.[0]
+                          if (!file) return
+
+                          setIsUploading(true)
+                          try {
+                            const formData = new FormData()
+                            formData.append("file", file)
+
+                            const response = await fetch("/api/upload", {
+                              method: "POST",
+                              body: formData,
+                            })
+
+                            const data = await handleApiResponse<{ url: string }>(response)
+                            setCoverImageUrl(data.url)
+                          } catch (error) {
+                            console.error("Upload error:", error)
+                            alert(error instanceof Error ? error.message : "Upload failed")
+                          } finally {
+                            setIsUploading(false)
+                            e.target.value = ""
+                          }
+                        }}
+                      />
+                    </label>
                   </div>
                 ) : (
                   <label className="group relative mt-2 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-sm border border-dashed border-neutral-800 p-8 text-neutral-500 transition-colors hover:border-neutral-700 hover:bg-neutral-900/30 hover:text-neutral-400">
@@ -367,12 +408,7 @@ export function Editor({ post, action }: EditorProps) {
                             body: formData,
                           })
 
-                          if (!response.ok) {
-                            const error = await response.json()
-                            throw new Error(error.error || "Upload failed")
-                          }
-
-                          const data = await response.json()
+                          const data = await handleApiResponse<{ url: string }>(response)
                           setCoverImageUrl(data.url)
                         } catch (error) {
                           console.error("Upload error:", error)

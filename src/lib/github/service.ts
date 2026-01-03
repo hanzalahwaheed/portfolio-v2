@@ -1,5 +1,6 @@
 import { GitHubSearchResponse, Contribution } from "./types"
 import { transformToContribution } from "./transformers"
+import { handleApiResponse } from "../api-client"
 
 /**
  * GitHub Service
@@ -24,11 +25,7 @@ export class GitHubService {
       },
     })
 
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`)
-    }
-
-    const data: GitHubSearchResponse = await response.json()
+    const data = await handleApiResponse<GitHubSearchResponse>(response)
     return data.items.map(transformToContribution)
   }
 }
