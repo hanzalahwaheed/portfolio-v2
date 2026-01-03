@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useMemo } from "react"
 import GitHubCalendar from "react-github-calendar"
 
 interface GitHubCalendarProps {
@@ -8,12 +9,35 @@ interface GitHubCalendarProps {
 }
 
 const GitHubCalendarComponent = ({ username, className = "" }: GitHubCalendarProps) => {
+  const currentYear = new Date().getFullYear()
+  const [selectedYear, setSelectedYear] = useState(currentYear)
+
+  const years = useMemo(() => {
+    return Array.from({ length: 4 }, (_, i) => currentYear - i)
+  }, [currentYear])
+
   return (
     <div className={`w-full ${className}`}>
+      <div className="mb-4 flex flex-wrap gap-2">
+        {years.map(year => (
+          <button
+            key={year}
+            onClick={() => setSelectedYear(year)}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+              selectedYear === year
+                ? "bg-green-600 text-white shadow-[0_0_15px_rgba(22,163,74,0.4)]"
+                : "bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-200"
+            }`}
+          >
+            {year}
+          </button>
+        ))}
+      </div>
+
       <div className="github-calendar-wrapper custom-scrollbar w-full overflow-x-auto pb-2">
         <GitHubCalendar
           username={username}
-          year={new Date().getFullYear()}
+          year={selectedYear}
           colorScheme="dark"
           style={{
             background: "transparent",
