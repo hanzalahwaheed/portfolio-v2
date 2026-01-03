@@ -1,7 +1,10 @@
-import Link from "next/link"
-import { GitMerge, GitPullRequest, CircleDot } from "lucide-react"
+"use client"
 
-import { ossContributions, OSSContribution } from "../config"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { GitMerge, GitPullRequest, CircleDot, Loader2 } from "lucide-react"
+
+import { ossContributions as staticContributions, OSSContribution, personalDetails } from "../config"
 
 const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContribution; isLast: boolean }) => {
   const getIcon = (type: OSSContribution["type"]) => {
@@ -54,15 +57,44 @@ const OSSTimelineItem = ({ contribution, isLast }: { contribution: OSSContributi
 }
 
 export const OssContributions = () => {
+  const [contributions, setContributions] = useState<OSSContribution[]>(staticContributions)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchContributions = async () => {
+      try {
+        const response = await fetch(`/api/github-latest-contributions?username=${personalDetails.githubUsername}`)
+        if (!response.ok) throw new Error("Failed to fetch")
+        const data = await response.json()
+        if (data.contributions && data.contributions.length > 0) {
+          setContributions(data.contributions)
+        }
+      } catch (error) {
+        console.error("Error fetching contributions:", error)
+        // Fallback to static data (already set as initial state)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchContributions()
+  }, [])
+
   return (
     <div className="custom-scrollbar max-h-[500px] overflow-y-auto pt-2 pr-4 pl-2">
-      {ossContributions.map((contribution, index) => (
-        <OSSTimelineItem
-          key={contribution.githubUrl}
-          contribution={contribution}
-          isLast={index === ossContributions.length - 1}
-        />
-      ))}
+      {isLoading ? (
+        <div className="flex h-32 items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#66acb6]" />
+        </div>
+      ) : (
+        contributions.map((contribution, index) => (
+          <OSSTimelineItem
+            key={contribution.githubUrl}
+            contribution={contribution}
+            isLast={index === contributions.length - 1}
+          />
+        ))
+      )}
     </div>
   )
 }
