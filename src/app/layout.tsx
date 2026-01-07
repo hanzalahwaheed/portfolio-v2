@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { instrumentSerif } from "./fonts"
+import { inter } from "./fonts"
 import "./globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${instrumentSerif.className}`}>
+      <body className={`antialiased font-serif ${inter.className}`}>
         <SpeedInsights />
         {children}
       </body>

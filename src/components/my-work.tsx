@@ -1,6 +1,7 @@
 import Link from "next/link"
 import GitHubCalendar from "./github-calendar"
 import OssContributions from "./oss-contributions"
+import { instrumentSerif } from "@/app/fonts"
 
 import { workExperiences, personalDetails, WorkExperience } from "../config"
 
@@ -9,8 +10,6 @@ const TechBadge = ({ tech }: { tech: string }) => (
     {tech}
   </span>
 )
-
-import { GitCommit, GitMerge, GitPullRequest, CircleDot } from "lucide-react"
 
 const WorkCard = ({ experience }: { experience: WorkExperience }) => (
   <div className="rounded-2xl bg-white/4 p-6 backdrop-blur-sm">
@@ -41,7 +40,9 @@ export const MyWork = () => {
   return (
     <div className="mx-auto mt-16 w-full max-w-3xl">
       {/* Work Experience */}
-      <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my work</h2>
+      <h2 className={`${instrumentSerif.className} text-glow mb-8 text-center text-3xl text-white md:text-4xl`}>
+        my work
+      </h2>
       <div className="grid gap-6">
         {workExperiences.map(experience => (
           <WorkCard key={experience.company} experience={experience} />
@@ -50,13 +51,17 @@ export const MyWork = () => {
 
       {/* OSS Contributions */}
       <div className="mt-12">
-        <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">open source</h2>
+        <h2 className={`${instrumentSerif.className} text-glow mb-8 text-center text-3xl text-white md:text-4xl`}>
+          open source
+        </h2>
         <OssContributions />
       </div>
 
       {/* GitHub Calendar */}
       <div className="mt-12">
-        <h2 className="text-glow mb-8 text-center text-3xl text-white md:text-4xl">my github</h2>
+        <h2 className={`${instrumentSerif.className} text-glow mb-8 text-center text-3xl text-white md:text-4xl`}>
+          my github
+        </h2>
         <div className="w-full max-w-full rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6">
           <GitHubCalendar username={personalDetails.githubUsername} />
         </div>

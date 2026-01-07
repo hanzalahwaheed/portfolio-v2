@@ -63,7 +63,9 @@ const Home = () => {
       <Grind />
       <Lines />
 
-      <footer className="flex h-48 flex-col items-center justify-center gap-4 bg-[#061113]">
+      <footer
+        className={`flex h-48 flex-col items-center justify-center gap-4 bg-[#061113] ${instrumentSerif.className}`}
+      >
         <p>Design and Development by Hanzalah Waheed</p>
         <p>&copy; {new Date().getFullYear()}</p>
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" className="text-white hover:underline" target="_blank">

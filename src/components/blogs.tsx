@@ -7,6 +7,7 @@ import { ArrowUpRight, Calendar, Clock, ChevronRight } from "lucide-react"
 import { getPosts } from "@/app/actions/blogs"
 import { Post } from "@/db"
 import { format } from "date-fns"
+import { instrumentSerif } from "@/app/fonts"
 
 type ArticleSize = "large" | "tall" | "wide" | "standard"
 
@@ -119,7 +120,7 @@ const BlogCard = ({ article }: { article: Article }) => {
               </span>
             </div>
 
-            <h3 className="mb-2 font-serif text-2xl leading-tight font-medium text-white group-hover:text-neutral-200">
+            <h3 className="mb-2 text-2xl leading-tight font-medium text-white group-hover:text-neutral-200">
               {article.title}
             </h3>
 
@@ -162,10 +163,14 @@ const Blogs = () => {
       {/* Section Header */}
       <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <h2 className="bg-gradient-to-b from-white to-white/60 bg-clip-text pb-2 font-serif text-4xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-5xl">
+          <h2
+            className={`${instrumentSerif.className} bg-gradient-to-b from-white to-white/60 bg-clip-text pb-2 text-4xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-5xl`}
+          >
             Blogs
           </h2>
-          <p className="mt-4 max-w-md text-white">I write about tech and design.</p>
+          <p className="mt-4 max-w-md text-white">
+            I mostly write about tech and some personal thoughts on stuff I read.
+          </p>
         </div>
 
         <Link

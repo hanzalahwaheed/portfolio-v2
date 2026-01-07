@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { Star, ArrowRight, Quote } from "lucide-react"
 
 import { books as library, bookCategories as categories, Book } from "../config"
+import { instrumentSerif } from "@/app/fonts"
 
 const Bookery = () => {
   const [activeBook, setActiveBook] = useState<Book>(library[0])
@@ -42,10 +43,12 @@ const Bookery = () => {
       {/* --- LEFT: The Collection List --- */}
       <div className="relative z-10 flex h-full w-full flex-col border-r border-[#1E383C]/50 bg-[#0D1B21]/40 p-8 backdrop-blur-sm md:w-5/12 md:p-16">
         <header className="mb-8">
-          <h2 className="bg-gradient-to-b from-white to-white/60 bg-clip-text font-serif text-4xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-5xl">
+          <h2
+            className={`bg-gradient-to-b from-white to-white/60 bg-clip-text ${instrumentSerif.className} text-4xl tracking-tight text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] md:text-5xl`}
+          >
             Bookery
           </h2>
-          <p className="mt-4 max-w-md text-neutral-500">I LOVE reading. Here are some of my favorite books.</p>
+          <p className="mt-4 max-w-md text-neutral-500">I love reading. Here are some of my favorite books.</p>
         </header>
 
         {/* Category Filter */}
@@ -75,7 +78,7 @@ const Bookery = () => {
                   }`}
                 >
                   <span
-                    className={`font-mono text-xs transition-colors duration-300 ${
+                    className={`text-xs transition-colors duration-300 ${
                       activeBook.id === book.id ? "text-white" : "text-neutral-600 group-hover:text-neutral-400"
                     }`}
                   >
@@ -83,13 +86,13 @@ const Bookery = () => {
                   </span>
                   <div className="flex flex-col">
                     <span
-                      className={`font-serif text-3xl leading-none transition-all duration-300 md:text-4xl ${
+                      className={`text-3xl leading-none transition-all duration-300 md:text-4xl ${
                         activeBook.id === book.id ? "text-white" : "text-neutral-500 group-hover:text-neutral-300"
                       }`}
                     >
                       {book.title}
                     </span>
-                    {book.subtitle && (
+                    {/* {book.subtitle && (
                       <span
                         className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${
                           activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
@@ -97,7 +100,7 @@ const Bookery = () => {
                       >
                         {book.subtitle}
                       </span>
-                    )}
+                    )} */}
                     <span
                       className={`mt-1 text-xs tracking-wider uppercase transition-all duration-300 ${
                         activeBook.id === book.id ? "text-neutral-400 opacity-100" : "h-0 overflow-hidden opacity-0"
@@ -112,9 +115,9 @@ const Bookery = () => {
           </ul>
         </nav>
 
-        <footer className="mt-8 font-mono text-xs text-[#1E383C]">
+        {/* <footer className="mt-8 font-mono text-xs text-[#1E383C]">
           <p>SELECT A TITLE TO VIEW</p>
-        </footer>
+        </footer> */}
       </div>
 
       {/* --- RIGHT: The Stage (Visualization) --- */}

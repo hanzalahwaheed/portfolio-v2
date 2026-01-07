@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { Link, Events, scrollSpy } from "react-scroll"
 import NextLink from "next/link"
+import { instrumentSerif } from "@/app/fonts"
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -58,7 +59,7 @@ const Navbar = () => {
       <div className="min-h-8 rounded-xl bg-white/10 shadow-lg backdrop-blur-md">
         <div className="flex items-center justify-center space-x-4 px-4 py-2">
           {/* Navigation Links */}
-          <div className="flex items-center justify-center space-x-3 md:space-x-6">
+          <div className={`${instrumentSerif.className} flex items-center justify-center space-x-3 md:space-x-6`}>
             <Link
               to="about-me"
               smooth={true}

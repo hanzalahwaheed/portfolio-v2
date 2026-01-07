@@ -48,6 +48,7 @@ const techCategories = {
   },
 }
 
+// Note: I want to update it to be something like I mostly work with TS and Python but I am a quick, high agency learner and can pick up new tech quickly. Cheers!
 export function TechStack({ className }: TechStackProps) {
   const TechSection = ({ category }: { category: { name: string; color: string; items: string[] } }) => (
     <div className="space-y-4">
