@@ -8,7 +8,7 @@ export const instrumentSerif = Instrument_Serif({
 })
 
 export const inter = Inter({
-  weight: ["400"],
+  weight: ["300"],
   subsets: ["latin"],
 })
 
