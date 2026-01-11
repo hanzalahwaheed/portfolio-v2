@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       const maxSizeMB = (MAX_SIZE / (1024 * 1024)).toFixed(0)
       return NextResponse.json(
         { error: `File size is ${fileSizeMB} MB, maximum allowed is ${maxSizeMB} MB` },
-        { status: 400 }
+        { status: 400 },
       )
     }
 
