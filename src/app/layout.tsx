@@ -6,6 +6,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata: Metadata = {
   title: "hanzlahwaheed",
   description: "Hanzlah Waheed Portfolio",
+  metadataBase: new URL("https://hanzalahwaheed.com"),
+  alternates: {
+    canonical: "/",
+  },
 }
 
 export default function RootLayout({
@@ -15,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased font-serif ${inter.className}`}>
+      <body className={`font-serif antialiased ${inter.className}`}>
         <SpeedInsights />
         {children}
       </body>
