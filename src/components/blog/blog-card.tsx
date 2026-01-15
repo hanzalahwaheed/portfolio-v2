@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { format } from "date-fns"
 import { Post } from "@/db"
+import { instrumentSerif } from "@/app/fonts"
 
 interface BlogCardProps {
   post: Post
@@ -13,7 +14,7 @@ export function BlogCard({ post }: BlogCardProps) {
         <div className="flex flex-col gap-2">
           <Link
             href={`/blogs/${post.slug}`}
-            className="text-rich-black dark:text-cream hover:text-deep-teal dark:hover:text-turquoise text-2xl font-bold transition-colors"
+            className={`${instrumentSerif.className} text-rich-black dark:text-cream hover:text-deep-teal dark:hover:text-turquoise text-2xl font-bold transition-colors`}
           >
             {post.title}
           </Link>
@@ -24,7 +25,9 @@ export function BlogCard({ post }: BlogCardProps) {
           </div>
         </div>
         {post.excerpt && (
-          <p className="text-rich-black/80 dark:text-cream/80 line-clamp-3 leading-relaxed">{post.excerpt}</p>
+          <p className="text-rich-black/80 dark:text-cream/80 line-clamp-3 leading-relaxed font-light">
+            {post.excerpt}
+          </p>
         )}
       </div>
       <Link

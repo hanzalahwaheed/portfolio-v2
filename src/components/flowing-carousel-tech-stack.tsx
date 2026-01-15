@@ -1,6 +1,5 @@
 "use client"
 
-import { inter, monospace } from "@/app/fonts"
 import { cn } from "@/lib/utils"
 
 interface FlowingCarouselProps {
@@ -48,7 +47,7 @@ export function FlowingCarouselTechStack({ className }: FlowingCarouselProps) {
             topTechnologies.map((tech, index) => (
               <div
                 key={`top-${setIndex}-${index}`}
-                className={`${monospace.className} inline-flex shrink-0 items-center rounded-full border border-gray-600/50 bg-gray-800/50 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-gray-700/50`}
+                className="inline-flex shrink-0 items-center rounded-full border border-gray-600/50 bg-gray-800/50 px-4 py-2 font-mono text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-gray-700/50"
               >
                 {tech}
               </div>
@@ -64,7 +63,7 @@ export function FlowingCarouselTechStack({ className }: FlowingCarouselProps) {
             bottomTechnologies.map((tech, index) => (
               <div
                 key={`bottom-${setIndex}-${index}`}
-                className={`${monospace.className} inline-flex shrink-0 items-center rounded-full border border-gray-600/50 bg-gray-800/50 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-gray-700/50`}
+                className="inline-flex shrink-0 items-center rounded-full border border-gray-600/50 bg-gray-800/50 px-4 py-2 font-mono text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-gray-700/50"
               >
                 {tech}
               </div>

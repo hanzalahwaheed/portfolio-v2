@@ -1,6 +1,6 @@
-export default function ResumePage() {
-  const resumeUrlFileId = process.env.RESUME_URL_FILE_ID
+const resumeUrlFileId = process.env.RESUME_URL_FILE_ID
 
+export default function ResumePage() {
   if (!resumeUrlFileId) {
     return (
       <div className="flex min-h-screen items-center justify-center text-white">

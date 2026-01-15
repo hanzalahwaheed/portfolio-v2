@@ -1,5 +1,6 @@
 import { getPosts } from "@/app/actions/blogs"
 import { BlogCard } from "@/components/blog/blog-card"
+import { instrumentSerif } from "@/app/fonts"
 import Image from "next/image"
 
 export default async function BlogPage() {
@@ -22,8 +23,8 @@ export default async function BlogPage() {
       <div className="relative z-10 container mx-auto max-w-4xl py-4 md:py-10">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-6 text-center md:text-left">
-            <h1 className="text-4xl font-bold lg:text-5xl">Blogs</h1>
-            <p className="text-xl">Thoughts, ideas, and tutorials.</p>
+            <h1 className={`${instrumentSerif.className} text-4xl font-bold lg:text-5xl`}>Blogs</h1>
+            <p className="text-xl font-light">Thoughts, ideas, and tutorials.</p>
             <div className="bg-gold-dust mx-auto h-1 w-20 rounded-full md:mx-0"></div>
           </div>
 
@@ -33,7 +34,6 @@ export default async function BlogPage() {
             ) : (
               posts.map(post => (
                 <div key={post.id} className="group relative">
-                  <div className="" />
                   <BlogCard post={post} />
                 </div>
               ))

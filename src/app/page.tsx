@@ -3,11 +3,15 @@ import Navbar from "@/components/navbar"
 import Lines from "@/components/lines"
 import AboutMe from "@/components/about-me"
 import Socials from "@/components/socials"
-import Blogs from "@/components/blogs"
-import Bookery from "@/components/bookery"
 import MoreBelow from "@/components/more-below"
-import Grind from "@/components/grind"
+import dynamic from "next/dynamic"
 import Link from "next/link"
+
+const Blogs = dynamic(() => import("@/components/blogs"), { loading: () => null })
+const Bookery = dynamic(() => import("@/components/bookery"), { loading: () => null })
+const Grind = dynamic(() => import("@/components/grind"), { loading: () => null })
+
+const currentYear = new Date().getFullYear()
 
 const Home = () => {
   return (
@@ -18,8 +22,6 @@ const Home = () => {
           <div
             className="relative h-screen w-screen bg-cover bg-center bg-no-repeat"
             style={{
-              // backgroundImage: "url('/images/image copy 3.png')",
-              // backgroundImage: "url('/images/temp.avif')",
               backgroundImage: "url('/images/hollow_knight_bg.jpg')",
             }}
           >
@@ -67,7 +69,7 @@ const Home = () => {
         className={`flex h-48 flex-col items-center justify-center gap-4 bg-[#061113] ${instrumentSerif.className}`}
       >
         <p>Design and Development by Hanzalah Waheed</p>
-        <p>&copy; {new Date().getFullYear()}</p>
+        <p>&copy; {currentYear}</p>
         <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" className="text-white hover:underline" target="_blank">
           Do not Click
         </Link>
