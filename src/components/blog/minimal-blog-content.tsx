@@ -325,7 +325,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                 ol: ({ children }) => <ol className="my-6 ml-6 list-decimal space-y-4 font-light">{children}</ol>,
                 li: ({ children }) => (
                   <li
-                    className={`leading-relaxed font-light ${isDark ? "text-neutral-300 marker:text-[#66acb6]" : "text-neutral-700 marker:text-[#0B5964]"}`}
+                    className={`text-lg leading-relaxed font-light md:text-xl ${isDark ? "text-neutral-300 marker:text-[#66acb6]" : "text-neutral-700 marker:text-[#0B5964]"}`}
                   >
                     {children}
                   </li>
