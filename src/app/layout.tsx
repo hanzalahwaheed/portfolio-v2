@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
-import { inter } from "./fonts"
 import "./globals.css"
+import { googleSans } from "@/app/fonts"
+
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-serif antialiased ${inter.className}`}>
+      <body className={`font-serif antialiased ${googleSans.variable}`}>
         <SpeedInsights />
         {children}
       </body>

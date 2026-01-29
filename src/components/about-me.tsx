@@ -22,9 +22,7 @@ const AboutMe = () => {
           <div className="flex-shrink-0">
             <Image src="/images/pfp.jpeg" alt="Hanzalah Waheed" width={250} height={250} className="rounded-3xl" />
           </div>
-          <div
-            className={`${inter.className} flex h-full flex-1 flex-col justify-center text-center leading-tight lg:text-left`}
-          >
+          <div className={`flex h-full flex-1 flex-col justify-center text-center leading-tight lg:text-left`}>
             <p className="flex-1 text-lg leading-relaxed font-medium text-gray-300 md:text-2xl">
               I like building software that brings order to complicated data and unclear requirements. At{" "}
               <Link
