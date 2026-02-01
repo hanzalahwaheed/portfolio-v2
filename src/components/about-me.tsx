@@ -4,7 +4,7 @@ import { MyBuilds } from "./my-builds"
 import { MyWork } from "./my-work"
 import Link from "next/link"
 // import { TechStack } from "./tech-stack"
-import { instrumentSerif, inter } from "@/app/fonts"
+import { instrumentSerif } from "@/app/fonts"
 
 const AboutMe = () => {
   return (

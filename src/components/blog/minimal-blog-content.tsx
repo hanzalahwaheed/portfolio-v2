@@ -30,7 +30,7 @@ import { format } from "date-fns"
 import type { Post } from "@/db"
 import { calculateReadTime } from "@/lib/blog-utils"
 import Link from "next/link"
-import { instrumentSerif, inter } from "@/app/fonts"
+import { instrumentSerif } from "@/app/fonts"
 
 // Custom remark plugin to wrap standalone code in paragraphs
 const remarkWrapStandaloneCode = () => {
@@ -263,7 +263,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
         {/* Content */}
         <article ref={contentRef}>
           <div
-            className={`markdown-content prose prose-lg max-w-none ${inter.className} font-light ${
+            className={`markdown-content prose prose-lg max-w-none font-sans font-light ${
               isDark ? "prose-invert text-neutral-300" : "text-neutral-700"
             }`}
           >

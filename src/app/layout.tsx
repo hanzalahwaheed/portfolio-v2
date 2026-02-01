@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-serif antialiased ${googleSans.variable}`}>
+      <body className={`font-sans antialiased ${googleSans.variable}`}>
         <SpeedInsights />
         {children}
       </body>
