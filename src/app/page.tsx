@@ -6,6 +6,48 @@ import Socials from "@/components/socials"
 import MoreBelow from "@/components/more-below"
 import dynamic from "next/dynamic"
 import Link from "next/link"
+import type { Metadata } from "next"
+import { socialLinks } from "@/config"
+
+export const metadata: Metadata = {
+  title: "Hanzalah Waheed | Software Developer",
+  description:
+    "Hanzalah Waheed is a software developer focused on AI and applied AI, building modern web products. Portfolio, projects, blogs, and open-source work.",
+  keywords: [
+    "Hanzalah Waheed",
+    "software developer",
+    "AI",
+    "applied AI",
+    "web developer",
+    "Next.js",
+    "TypeScript",
+    "portfolio",
+    "open source",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Hanzalah Waheed | Software Developer",
+    description:
+      "Software developer focused on AI and applied AI, building modern web products. Portfolio, projects, blogs, and open-source work.",
+    type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/images/pfp.jpeg",
+        alt: "Hanzalah Waheed",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hanzalah Waheed | Software Developer",
+    description:
+      "Software developer focused on AI and applied AI, building modern web products. Portfolio, projects, blogs, and open-source work.",
+    images: ["/images/pfp.jpeg"],
+  },
+}
 
 const Blogs = dynamic(() => import("@/components/blogs"), { loading: () => null })
 const Bookery = dynamic(() => import("@/components/bookery"), { loading: () => null })
@@ -14,8 +56,37 @@ const Grind = dynamic(() => import("@/components/grind"), { loading: () => null 
 const currentYear = new Date().getFullYear()
 
 const Home = () => {
+  const siteUrl = "https://hanzalahwaheed.com"
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Hanzalah Waheed",
+    url: siteUrl,
+    image: `${siteUrl}/images/pfp.jpeg`,
+    sameAs: [socialLinks.github, socialLinks.twitter, socialLinks.linkedin],
+    jobTitle: "Software Developer (AI & Applied AI)",
+  }
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Hanzalah Waheed",
+    url: siteUrl,
+    description:
+      "Portfolio, projects, blogs, and open-source work by Hanzalah Waheed, a software developer focused on AI and applied AI.",
+    publisher: {
+      "@type": "Person",
+      name: "Hanzalah Waheed",
+      url: siteUrl,
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([personJsonLd, websiteJsonLd]) }}
+      />
       <Navbar />
       <div className="flex h-screen w-full flex-col items-center justify-center bg-black">
         <main className="space-y-8 text-center">
