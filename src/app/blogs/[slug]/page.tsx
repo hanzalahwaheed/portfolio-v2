@@ -34,7 +34,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const title = `${post.title} | Hanzalah Waheed`
   const description = post.excerpt?.trim() || createExcerpt(post.content)
   const url = new URL(`/blogs/${post.slug}`, siteUrl)
-  const image = post.coverImage || undefined
+  const ogImage = new URL(`/blogs/${post.slug}/opengraph-image`, siteUrl)
+  const twitterImage = new URL(`/blogs/${post.slug}/twitter-image`, siteUrl)
 
   return {
     title,
@@ -47,13 +48,18 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description,
       url,
       type: "article",
-      images: image ? [{ url: image, alt: post.title }] : undefined,
+      images: [
+        {
+          url: ogImage,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
-      card: image ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description,
-      images: image ? [image] : undefined,
+      images: [twitterImage],
     },
   }
 }

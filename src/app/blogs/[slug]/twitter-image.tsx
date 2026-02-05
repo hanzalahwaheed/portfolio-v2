@@ -1,16 +1,15 @@
 import { ImageResponse } from "next/og"
 import { headers } from "next/headers"
+import { getPost } from "@/app/actions/blogs"
 
-export const runtime = "edge"
+export const runtime = "nodejs"
 export const size = {
   width: 1200,
-  height: 630,
+  height: 600,
 }
 export const contentType = "image/png"
 
-const name = "Hanzalah Waheed"
-
-export default async function Image() {
+export default async function Image({ params }: { params: { slug: string } }) {
   let fontData: ArrayBuffer | null = null
   try {
     fontData = await fetch(
@@ -20,10 +19,19 @@ export default async function Image() {
     fontData = null
   }
 
+  const post = await getPost(params.slug)
+  const title = post?.title || "Blog Post"
+  const coverImage = post?.coverImage || null
+
   const headersList = await headers()
   const host = headersList.get("host") ?? "hanzalahwaheed.com"
   const protocol = host.startsWith("localhost") ? "http" : "https"
-  const bgUrl = `${protocol}://${host}/images/hollow_knight_bg.jpg`
+  const fallbackImage = `${protocol}://${host}/images/pfp.jpeg`
+  const imageUrl = coverImage
+    ? coverImage.startsWith("http")
+      ? coverImage
+      : `${protocol}://${host}${coverImage.startsWith("/") ? coverImage : `/${coverImage}`}`
+    : fallbackImage
 
   return new ImageResponse(
     (
@@ -32,8 +40,9 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "stretch",
+          justifyContent: "flex-start",
           backgroundColor: "#141414",
           color: "#f8fafc",
           fontFamily: fontData ? "Instrument Serif" : "serif",
@@ -41,47 +50,35 @@ export default async function Image() {
       >
         <div
           style={{
-            width: 1040,
-            height: 520,
-            position: "relative",
+            width: "100%",
+            height: 430,
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div
+          style={{
+            width: "100%",
+            height: 170,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "0 120px",
-            gap: 48,
-            borderRadius: 40,
+            padding: "0 70px",
+            backgroundColor: "#141414",
           }}
         >
           <div
             style={{
-              width: 140,
-              height: 140,
-              borderRadius: 28,
-              backgroundImage: `url(${bgUrl})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
+              fontSize: 52,
+              lineHeight: 1.1,
+              letterSpacing: -0.3,
+              textAlign: "center",
+              textShadow:
+                "0 0 14px rgba(148,163,184,0.7), 0 0 26px rgba(148,163,184,0.45), 0 8px 22px rgba(0,0,0,0.6)",
             }}
           >
-            <img
-              src={`${protocol}://${host}/images/pfp.jpeg`}
-              width={140}
-              height={140}
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div
-            style={{
-              fontSize: 76,
-              letterSpacing: -0.4,
-              textShadow: "0 0 18px rgba(148,163,184,0.7), 0 0 36px rgba(148,163,184,0.5), 0 8px 30px rgba(0,0,0,0.65)",
-            }}
-          >
-            {name}
+            {title}
           </div>
         </div>
       </div>

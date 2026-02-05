@@ -34,7 +34,7 @@ export default async function Image() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0b1323",
+          backgroundColor: "#141414",
           color: "#f8fafc",
           fontFamily: fontData ? "Instrument Serif" : "serif",
         }}
