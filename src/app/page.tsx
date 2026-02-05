@@ -35,7 +35,9 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/images/pfp.jpeg",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
         alt: "Hanzalah Waheed",
       },
     ],
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     title: "Hanzalah Waheed | Software Developer",
     description:
       "Software developer focused on AI and applied AI, building modern web products. Portfolio, projects, blogs, and open-source work.",
-    images: ["/images/pfp.jpeg"],
+    images: ["/twitter-image"],
   },
 }
 
