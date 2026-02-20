@@ -1,4 +1,4 @@
-import { GitHubSearchResponse, Contribution } from "./types"
+import { GitHubSearchIssueItem, GitHubSearchResponse, Contribution } from "./types"
 import { transformToContribution } from "./transformers"
 import { handleApiResponse } from "../api-client"
 
@@ -10,12 +10,28 @@ export class GitHubService {
   private readonly baseUrl = "https://api.github.com"
   private readonly userAgent = "Portfolio-App"
 
-  /**
-   * Fetch latest contributions (PRs and Issues) for a user
-   * Excludes contributions to the user's own repositories
-   */
   async getLatestContributions(username: string, limit: number = 10): Promise<Contribution[]> {
-    const query = `author:${username} is:public -user:${username}`
+    const mergedPrQuery = `author:${username} is:public is:pr is:merged -user:${username}`
+    const issueQuery = `author:${username} is:public is:issue -user:${username}`
+
+    const [mergedPrs, issues] = await Promise.all([
+      this.searchIssues(mergedPrQuery, limit),
+      this.searchIssues(issueQuery, limit),
+    ])
+
+    const contributionsByUrl = new Map<string, GitHubSearchIssueItem>()
+
+    for (const item of [...mergedPrs, ...issues]) {
+      contributionsByUrl.set(item.html_url, item)
+    }
+
+    return [...contributionsByUrl.values()]
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .slice(0, limit)
+      .map(transformToContribution)
+  }
+
+  private async searchIssues(query: string, limit: number): Promise<GitHubSearchIssueItem[]> {
     const url = `${this.baseUrl}/search/issues?q=${encodeURIComponent(query)}&sort=created&order=desc&per_page=${limit}`
 
     const response = await fetch(url, {
@@ -26,7 +42,7 @@ export class GitHubService {
     })
 
     const data = await handleApiResponse<GitHubSearchResponse>(response)
-    return data.items.map(transformToContribution)
+    return data.items
   }
 }
 
