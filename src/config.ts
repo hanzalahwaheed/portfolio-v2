@@ -8,6 +8,10 @@ export const socialLinks = {
   linkedin: "https://linkedin.com/in/hanzalahwaheed",
 }
 
+export const contactLinks = {
+  scheduleCall: process.env.NEXT_PUBLIC_CALCOM_URL ?? "https://cal.com/hanzalahwaheed",
+}
+
 export interface OSSContribution {
   project: string
   projectUrl: string
