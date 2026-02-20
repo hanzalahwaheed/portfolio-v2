@@ -9,8 +9,6 @@ import { Post } from "@/db"
 import { format } from "date-fns"
 import { instrumentSerif } from "@/app/fonts"
 
-type ArticleSize = "large" | "tall" | "wide" | "standard"
-
 type Article = {
   id: string
   title: string
@@ -19,7 +17,7 @@ type Article = {
   readTime: string
   category: string
   image: string
-  size: ArticleSize
+  layoutClass: string
   slug: string
 }
 
@@ -31,13 +29,42 @@ const estimateReadTime = (content: string): string => {
   return `${minutes} min`
 }
 
+const getBentoLayoutClass = (index: number, total: number): string => {
+  if (total === 1) {
+    return "sm:col-span-2 lg:col-span-12 lg:row-span-2"
+  }
+
+  if (index === 0) {
+    return "sm:col-span-2 lg:col-span-8 lg:row-span-2"
+  }
+
+  if (index === 1) {
+    return "sm:col-span-2 lg:col-span-4 lg:row-span-2"
+  }
+
+  const trailingCount = total - 2
+
+  if (trailingCount === 1) {
+    return "lg:col-span-12 lg:row-span-2"
+  }
+
+  if (trailingCount === 2) {
+    return "lg:col-span-6 lg:row-span-2"
+  }
+
+  if (trailingCount === 3) {
+    return "lg:col-span-4 lg:row-span-2"
+  }
+
+  return "lg:col-span-3 lg:row-span-2"
+}
+
 // Map posts to articles with size distribution
 const mapPostsToArticles = (posts: Post[]): Article[] => {
-  const sizePattern: ArticleSize[] = ["large", "tall", "standard", "wide", "standard"]
   const defaultImage = "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop"
 
   return posts.map((post, index) => {
-    const size = sizePattern[index % sizePattern.length]
+    const layoutClass = getBentoLayoutClass(index, posts.length)
     const date = post.publishedAt
       ? format(new Date(post.publishedAt), "MMM dd, yyyy")
       : format(new Date(post.createdAt), "MMM dd, yyyy")
@@ -50,7 +77,7 @@ const mapPostsToArticles = (posts: Post[]): Article[] => {
       readTime: estimateReadTime(post.content),
       category: "Blog", // You can add a category field to posts later if needed
       image: post.coverImage || defaultImage,
-      size,
+      layoutClass,
       slug: post.slug,
     }
   })
@@ -59,24 +86,10 @@ const mapPostsToArticles = (posts: Post[]): Article[] => {
 const BlogCard = ({ article }: { article: Article }) => {
   const [isHovered, setIsHovered] = useState(false)
 
-  // Determine grid spans based on the 'size' property
-  const getGridClasses = (size: ArticleSize): string => {
-    switch (size) {
-      case "large":
-        return "md:col-span-2 md:row-span-2"
-      case "tall":
-        return "md:col-span-1 md:row-span-2"
-      case "wide":
-        return "md:col-span-2 md:row-span-1"
-      default:
-        return "md:col-span-1 md:row-span-1"
-    }
-  }
-
   return (
-    <Link href={`/blogs/${article.slug}`}>
+    <Link href={`/blogs/${article.slug}`} className={`${article.layoutClass} block`}>
       <div
-        className={`group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 ${getGridClasses(article.size)} cursor-pointer transition-all duration-500 hover:border-neutral-600`}
+        className="group relative h-full cursor-pointer overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 transition-all duration-500 hover:border-neutral-600"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -158,6 +171,8 @@ const Blogs = () => {
     fetchPosts()
   }, [])
 
+  const displayArticles = articles.slice(0, 6)
+
   return (
     <div className="min-h-screen bg-[#050505] p-8 font-sans text-white selection:bg-white selection:text-black md:p-16">
       {/* Section Header */}
@@ -192,8 +207,8 @@ const Blogs = () => {
           <p className="text-neutral-500">No posts available yet.</p>
         </div>
       ) : (
-        <div className="grid auto-rows-[300px] grid-cols-1 gap-4 md:grid-cols-4">
-          {articles.map(article => (
+        <div className="grid auto-rows-[260px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-flow-dense lg:auto-rows-[170px] lg:grid-cols-12">
+          {displayArticles.map(article => (
             <BlogCard key={article.id} article={article} />
           ))}
         </div>

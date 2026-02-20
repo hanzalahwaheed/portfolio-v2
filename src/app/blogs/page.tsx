@@ -20,7 +20,7 @@ export default async function BlogPage() {
         <div className="from-cream/90 via-cream/80 to-cream/90 dark:from-rich-black/90 dark:via-rich-black/80 dark:to-rich-black/90 absolute inset-0 bg-gradient-to-b" />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-4xl py-4 md:py-10">
+      <div className="relative z-10 container mx-auto max-w-4xl py-4 md:py-10 lg:max-w-5xl xl:max-w-6xl">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-6 text-center md:text-left">
             <h1 className={`${instrumentSerif.className} text-4xl font-bold lg:text-5xl`}>Blogs</h1>

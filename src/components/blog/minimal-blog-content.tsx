@@ -155,7 +155,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
           isDark ? "border-neutral-800 bg-neutral-950/90" : "border-neutral-200 bg-white/90"
         }`}
       >
-        <div className="container mx-auto flex h-16 max-w-3xl items-center justify-between px-6">
+        <div className="container mx-auto flex h-16 max-w-3xl items-center justify-between px-6 lg:max-w-4xl xl:max-w-5xl">
           <Link href="/blogs" className="group flex items-center gap-2 text-sm transition-all">
             <ChevronRight
               size={16}
@@ -189,7 +189,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
         </div>
       </nav>
 
-      <main className="container mx-auto max-w-3xl px-6 pt-32 pb-24">
+      <main className="container mx-auto max-w-3xl px-6 pt-32 pb-24 lg:max-w-4xl xl:max-w-5xl">
         {/* Article Title Block */}
         <header className="mb-16">
           <div className="flex flex-col gap-6">
@@ -228,7 +228,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                   Hanzalah Waheed
                 </span>
                 <span className={`font-mono text-xs ${isDark ? "text-neutral-500" : "text-neutral-500"}`}>
-                  Developer & Writer
+                  Software Engineer · Execution-First
                 </span>
               </div>
             </div>
@@ -374,7 +374,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                   if (isInline) {
                     return (
                       <code
-                        className={`inline-code rounded px-2 py-0.5 font-mono text-sm transition-all duration-200 ${
+                        className={`inline-code rounded-none px-2 py-0.5 font-mono text-sm transition-all duration-200 ${
                           isDark
                             ? "border-b-2 border-[#66acb6]/50 bg-[#66acb6]/10 text-[#66acb6]"
                             : "border-b-2 border-[#0B5964]/50 bg-[#0B5964]/10 text-[#0B5964]"
@@ -388,7 +388,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
 
                   return (
                     <div
-                      className={`my-10 overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl ${
+                      className={`my-10 overflow-hidden rounded-none border shadow-lg transition-all duration-300 hover:shadow-xl ${
                         isDark
                           ? "border-neutral-800 bg-neutral-900 shadow-neutral-950/30"
                           : "border-neutral-200 bg-neutral-50 shadow-neutral-300/20"
@@ -401,7 +401,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                       >
                         <div className="flex items-center gap-2">
                           <span
-                            className={`rounded-md border px-2.5 py-1 font-mono text-xs font-medium tracking-wider uppercase ${
+                            className={`rounded-none border px-2.5 py-1 font-mono text-xs font-medium tracking-wider uppercase ${
                               isDark
                                 ? "border-[#66acb6]/30 bg-[#66acb6]/10 text-[#66acb6]"
                                 : "border-[#0B5964]/30 bg-[#0B5964]/10 text-[#0B5964]"
@@ -412,7 +412,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                         </div>
                         <button
                           onClick={() => handleCopyCode(codeString, currentIndex)}
-                          className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                          className={`rounded-none border px-3 py-1.5 text-sm font-medium transition-all duration-200 hover:scale-105 ${
                             isDark
                               ? "border-neutral-700 text-neutral-400 hover:border-[#66acb6] hover:text-[#66acb6]"
                               : "border-neutral-300 text-neutral-600 hover:border-[#0B5964] hover:text-[#0B5964]"
@@ -446,7 +446,7 @@ export function MinimalBlogContent({ post }: MinimalBlogContentProps) {
                   )
                 },
                 table: ({ children }) => (
-                  <div className="my-10 overflow-x-auto rounded-xl border shadow-md">
+                  <div className="my-10 overflow-x-auto rounded-none border shadow-md">
                     <table
                       className={`w-full border-collapse text-left ${isDark ? "border-neutral-800" : "border-neutral-200"}`}
                     >
